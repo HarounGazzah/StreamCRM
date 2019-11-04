@@ -1,0 +1,124 @@
+<div class="container tab-pane fade show active" role="tabpanel">
+  <div class="row">
+    <div class="col">
+      <mdb-card>
+
+        <div class="row">
+          <div class="col">
+            <mdb-card>
+              <mdb-card-header>Détails De L'utilisateur</mdb-card-header>
+            </mdb-card>
+          </div>
+
+        </div>
+        <!--      <div class="row">-->
+        <!--        <div [class.bg-info]="!editing && !currentUser" [class.bg-warning]="editing || currentUser" class="col border">-->
+        <!--          <h5 class="text-dark dropdown-header">Détails De L'utilisateur</h5>-->
+        <!--        </div>-->
+        <!--      </div>-->
+        <mdb-card-body>
+
+          <div class="row">
+            <div class="col">
+              <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+
+                <div class="form-group">
+                  <label>Nom</label> <input #firstname_input="ngModel" [(ngModel)]="user.firstname" class="form-control"
+                                            name="firstname"
+                                            required/>
+                  <app-field-error-display
+                    [displayError]="form.submitted && firstname_input.invalid"
+                    [model]="firstname_input"
+                    fieldName="Nom">
+                  </app-field-error-display>
+                </div>
+                <div class="form-group">
+                  <label>Prénom</label>
+                  <input #lastname_input="ngModel" [(ngModel)]="user.lastname" class="form-control" name="lastname"
+                         required/>
+                  <app-field-error-display
+                    [displayError]="form.submitted && lastname_input.invalid"
+                    [model]="lastname_input"
+                    fieldName="Prénom">
+                  </app-field-error-display>
+                </div>
+
+                <div *ngIf="!editing && !currentUser" class="form-group">
+                  <label>Mot de Passe</label>
+                  <input #password_input="ngModel" [(ngModel)]="user.password" class="form-control" minlength="8"
+                         name="mdp"
+                         required reverse="true" type="password" validateEqual="confirmPassword"/>
+                  <app-field-error-display
+                    [displayError]="form.submitted && password_input.invalid"
+                    [model]="password_input"
+                    fieldName="Mot de Passe">
+                  </app-field-error-display>
+                </div>
+
+                <div *ngIf="!editing && !currentUser" class="form-group">
+                  <label>Confirmation du Mot de Passe</label>
+                  <input #confirmPassword_input="ngModel" [(ngModel)]="user.confirmPassword"
+                         class="form-control" minlength="8"
+                         name="confirmPassword" required type="password"
+                         validateEqual="mdp">
+                  <app-field-error-display
+                    [displayError]="form.submitted && confirmPassword_input.invalid"
+                    [model]="confirmPassword_input"
+                    fieldName="Confirmation du Mot de Passe">
+                  </app-field-error-display>
+                </div>
+
+                <div class="form-group">
+                  <label>Email: </label>
+                  <input #email_input="ngModel" [(ngModel)]="user.email" class="form-control"
+                         email name="mail">
+                  <app-field-error-display
+                    [displayError]="form.submitted && email_input.invalid"
+                    [model]="email_input"
+                    fieldName="Email">
+                  </app-field-error-display>
+                </div>
+
+
+                <div *ngIf="!currentUser" class="form-group">
+                  <label>Roles</label>
+
+                  <ng-select [(ngModel)]="user.roles" [hideSelected]="true" [multiple]="true"
+                             bindValue="label" id="roles" name="roles">
+
+                    <ng-option value="ROLE_ADMIN">Admin</ng-option>
+                    <ng-option value="ROLE_CLIENT">Client</ng-option>
+                    <ng-option value="ROLE_RESOURCE">Resource</ng-option>
+
+                  </ng-select>
+                </div>
+
+                <div class="form-group">
+                  <button style="margin: 5px" color="primary" mat-raised-button type="submit">
+                    <mat-icon>save</mat-icon>
+                    Enregistrer
+                  </button>
+
+
+                  <button color="warn" mat-raised-button routerLink="/admin/users"
+                          type="reset">
+                    <mat-icon>cancel</mat-icon>
+                    Annuler
+                  </button>
+
+                </div>
+              </form>
+            </div>
+            <div class="col" >
+              <div style="margin-left: 100px;">
+                <app-user-avatar></app-user-avatar>
+
+              </div>
+
+            </div>
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </div>
+</div>

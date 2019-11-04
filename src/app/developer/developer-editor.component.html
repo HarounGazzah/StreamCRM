@@ -1,0 +1,376 @@
+<div [ngClass]="{'container-fluid': editing,
+                 'container': !editing}">
+  <div class="row">
+
+    <div class="col">
+      <mdb-card>
+
+        <div class="row">
+          <div class="col">
+            <mdb-card>
+              <mdb-card-header>Informations <label class="float-right" *ngIf="editing">Crée
+                le {{ developer.createdDate | date }} à {{ developer.createdDate | date:'hh:mm' }}</label>
+              </mdb-card-header>
+            </mdb-card>
+          </div>
+        </div>
+        <mdb-card-body>
+          <div class="row">
+            <div class="col">
+
+              <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+
+                <!--                <div class="form-group">-->
+                <table class="table table-striped">
+                  <thead></thead>
+                  <tbody>
+
+                  <tr>
+                    <th scope="row"><b>Nom</b></th>
+                    <td><input #firstname_input="ngModel" [(ngModel)]="developer.firstname"
+                               class="form-control" name="firstname"
+                               required/></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><b>Prénom</b></th>
+                    <td><input #lastname_input="ngModel" [(ngModel)]="developer.lastname"
+                               class="form-control" name="lastname"
+                               required/></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><b>Sexe</b></th>
+                    <td><input [(ngModel)]="developer.gender" name="gender" type="radio"
+                               value="M"> Mr <input [(ngModel)]="developer.gender"
+                                                    name="gender" type="radio"
+                                                    value="F">Mme
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><b>Status</b></th>
+                    <td><select [(ngModel)]="developer.stage" class="form-control"
+                                name="stage">
+                      <option *ngFor="let stage of stages" [ngValue]="stage.value">{{stage.label}}</option>
+                    </select></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><b>Responsable RH</b></th>
+                    <td>
+                      <select [(ngModel)]="developer.rhReference" class="form-control" name="rh">
+                        <option
+                          *ngFor="let user of users" [ngValue]="user.reference">{{user.firstname}} {{user.lastname}}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><b>Responsable Manager</b></th>
+                    <td>
+                      <select [(ngModel)]="developer.managerReference"
+                              class="form-control" name="manager">
+                        <option *ngFor="let user of users" [ngValue]="user.reference">{{user.firstname}}
+                          {{user.lastname}}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><b>Disponibiltité</b></th>
+                    <td>
+                      <!--                      <input [(ngModel)]="developer.availability"-->
+                      <!--                             class="form-control" name="availability"-->
+                      <!--                             type="date"/>-->
+
+
+                      <mat-form-field style="display: flex; flex-direction: column; width: 100%;">
+                        <input
+                          [(ngModel)]="developer.availability"
+                          [matDatepicker]="picker"
+                          matInput
+                          name="availability"
+                          placeholder="Disponibiltité">
+
+                        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><b>Mobilité</b></th>
+                    <td>
+                      <ng-select #mobility="ngModel" [(ngModel)]="developer.mobility" [hideSelected]="true"
+                                 [multiple]="true" bindValue="label"
+                                 id="mobility" name="mobility">
+
+
+                        <ng-option value="monde">Monde</ng-option>
+                        <ng-option value="Afghanistan">Afghanistan</ng-option>
+                        <ng-option value="Afrique Centrale">Afrique Centrale</ng-option>
+                        <ng-option value="Afrique du sud">Afrique du Sud</ng-option>
+                        <ng-option value="Albanie">Albanie</ng-option>
+                        <ng-option value="Algerie">Algerie</ng-option>
+                        <ng-option value="Allemagne">Allemagne</ng-option>
+                        <ng-option value="Andorre">Andorre</ng-option>
+                        <ng-option value="Angola">Angola</ng-option>
+                        <ng-option value="Anguilla">Anguilla</ng-option>
+                        <ng-option value="Arabie Saoudite">Arabie Saoudite</ng-option>
+                        <ng-option value="Argentine">Argentine</ng-option>
+                        <ng-option value="Armenie">Armenie</ng-option>
+                        <ng-option value="Australie">Australie</ng-option>
+                        <ng-option value="Autriche">Autriche</ng-option>
+                        <ng-option value="Azerbaidjan">Azerbaidjan</ng-option>
+                        <ng-option value="Bahamas">Bahamas</ng-option>
+                        <ng-option value="Bangladesh">Bangladesh</ng-option>
+                        <ng-option value="Barbade">Barbade</ng-option>
+                        <ng-option value="Bahrein">Bahrein</ng-option>
+                        <ng-option value="Belgique">Belgique</ng-option>
+                        <ng-option value="Belize">Belize</ng-option>
+                        <ng-option value="Benin">Benin</ng-option>
+                        <ng-option value="Bermudes">Bermudes</ng-option>
+                        <ng-option value="Bielorussie">Bielorussie</ng-option>
+                        <ng-option value="Birmanie">Birmanie</ng-option>
+                        <ng-option value="Bolivie">Bolivie</ng-option>
+                        <ng-option value="Botswana">Botswana</ng-option>
+                        <ng-option value="Bhoutan">Bhoutan</ng-option>
+                        <ng-option value="Boznie Herzegovine">Boznie Herzegovine</ng-option>
+                        <ng-option value="Bresil">Bresil</ng-option>
+                        <ng-option value="Brunei">Brunei</ng-option>
+                        <ng-option value="Bulgarie">Bulgarie</ng-option>
+                        <ng-option value="Burkina Faso">Burkina Faso</ng-option>
+                        <ng-option value="Burundi">Burundi</ng-option>
+                        <ng-option value="Caiman">Caiman</ng-option>
+                        <ng-option value="Cambodge">Cambodge</ng-option>
+                        <ng-option value="Cameroun">Cameroun</ng-option>
+                        <ng-option value="Canada">Canada</ng-option>
+                        <ng-option value="Canaries">Canaries</ng-option>
+                        <ng-option value="Cap vert">Cap Vert</ng-option>
+                        <ng-option value="Chili">Chili</ng-option>
+                        <ng-option value="Chine">Chine</ng-option>
+                        <ng-option value="Chypre">Chypre</ng-option>
+                        <ng-option value="Colombie">Colombie</ng-option>
+                        <ng-option value="Comores">Comores</ng-option>
+                        <ng-option value="Congo">Congo</ng-option>
+                        <ng-option value="Congo democratique">Congo democratique</ng-option>
+                        <ng-option value="Cook">Cook</ng-option>
+                        <ng-option value="Coree du Nord">Coree du Nord</ng-option>
+                        <ng-option value="Coree du Sud">Coree du Sud</ng-option>
+                        <ng-option value="Costa Rica">Costa Rica</ng-option>
+                        <ng-option value="Cote d Ivoire">Côte d Ivoire</ng-option>
+                        <ng-option value="Croatie">Croatie</ng-option>
+                        <ng-option value="Cuba">Cuba</ng-option>
+                        <ng-option value="Danemark">Danemark</ng-option>
+                        <ng-option value="Djibouti">Djibouti</ng-option>
+                        <ng-option value="Dominique">Dominique</ng-option>
+                        <ng-option value="Egypte">Egypte</ng-option>
+                        <ng-option value="Emirats Arabes Unis">Emirats Arabes Unis</ng-option>
+                        <ng-option value="Equateur">Equateur</ng-option>
+                        <ng-option value="Erythree">Erythree</ng-option>
+                        <ng-option value="Espagne">Espagne</ng-option>
+                        <ng-option value="Estonie">Estonie</ng-option>
+                        <ng-option value="Etats Unis">Etats Unis</ng-option>
+                        <ng-option value="Ethiopie">Ethiopie</ng-option>
+                        <ng-option value="Falkland">Falkland</ng-option>
+                        <ng-option value="Feroe">Feroe</ng-option>
+                        <ng-option value="Fidji">Fidji</ng-option>
+                        <ng-option value="Finlande">Finlande</ng-option>
+                        <ng-option value="France">France</ng-option>
+                        <ng-option value="Gabon">Gabon</ng-option>
+                        <ng-option value="Gambie">Gambie</ng-option>
+                        <ng-option value="Georgie">Georgie</ng-option>
+                        <ng-option value="Ghana">Ghana</ng-option>
+                        <ng-option value="Gibraltar">Gibraltar</ng-option>
+                        <ng-option value="Grece">Grece</ng-option>
+                        <ng-option value="Grenade">Grenade</ng-option>
+                        <ng-option value="Groenland">Groenland</ng-option>
+                        <ng-option value="Guadeloupe">Guadeloupe</ng-option>
+                        <ng-option value="Guam">Guam</ng-option>
+                        <ng-option value="Guatemala">Guatemala</ng-option>
+                        <ng-option value="Guernesey">Guernesey</ng-option>
+                        <ng-option value="Guinee">Guinee</ng-option>
+                        <ng-option value="Guinee Bissau">Guinee Bissau</ng-option>
+                        <ng-option value="Guinee equatoriale">Guinee Equatoriale</ng-option>
+                        <ng-option value="Guyana">Guyana</ng-option>
+                        <ng-option value="Guyane Francaise ">Guyane Francaise</ng-option>
+                        <ng-option value="Haiti">Haiti</ng-option>
+                        <ng-option value="Hawaii">Hawaii</ng-option>
+                        <ng-option value="Honduras">Honduras</ng-option>
+                        <ng-option value="Hong Kong">Hong Kong</ng-option>
+                        <ng-option value="Hongrie">Hongrie</ng-option>
+                        <ng-option value="Inde">Inde</ng-option>
+                        <ng-option value="Indonesie">Indonesie</ng-option>
+                        <ng-option value="Iran">Iran</ng-option>
+                        <ng-option value="Iraq">Iraq</ng-option>
+                        <ng-option value="Irlande">Irlande</ng-option>
+                        <ng-option value="Islande">Islande</ng-option>
+                        <ng-option value="Israel">Israel</ng-option>
+                        <ng-option value="Italie">Italie</ng-option>
+                        <ng-option value="Jamaique">Jamaique</ng-option>
+                        <ng-option value="Jan Mayen">Jan Mayen</ng-option>
+                        <ng-option value="Japon">Japon</ng-option>
+                        <ng-option value="Jersey">Jersey</ng-option>
+                        <ng-option value="Jordanie">Jordanie</ng-option>
+                        <ng-option value="Kazakhstan">Kazakhstan</ng-option>
+                        <ng-option value="Kenya">Kenya</ng-option>
+                        <ng-option value="Kirghizstan">Kirghizistan</ng-option>
+                        <ng-option value="Kiribati">Kiribati</ng-option>
+                        <ng-option value="Koweit">Koweit</ng-option>
+                        <ng-option value="Laos">Laos</ng-option>
+                        <ng-option value="Lesotho">Lesotho</ng-option>
+                        <ng-option value="Lettonie">Lettonie</ng-option>
+                        <ng-option value="Liban">Liban</ng-option>
+                        <ng-option value="Liberia">Liberia</ng-option>
+                        <ng-option value="Liechtenstein">Liechtenstein</ng-option>
+                        <ng-option value="Lituanie">Lituanie</ng-option>
+                        <ng-option value="Luxembourg">Luxembourg</ng-option>
+                        <ng-option value="Lybie">Lybie</ng-option>
+                        <ng-option value="Macao">Macao</ng-option>
+                        <ng-option value="Macedoine">Macedoine</ng-option>
+                        <ng-option value="Madagascar">Madagascar</ng-option>
+                        <ng-option value="Madere">Madère</ng-option>
+                        <ng-option value="Malaisie">Malaisie</ng-option>
+                        <ng-option value="Malawi">Malawi</ng-option>
+                        <ng-option value="Maldives">Maldives</ng-option>
+                        <ng-option value="Mali">Mali</ng-option>
+                        <ng-option value="Malte">Malte</ng-option>
+                        <ng-option value="Man">Man</ng-option>
+                        <ng-option value="Mariannes du Nord">Mariannes du Nord</ng-option>
+                        <ng-option value="Maroc">Maroc</ng-option>
+                        <ng-option value="Marshall">Marshall</ng-option>
+                        <ng-option value="Martinique">Martinique</ng-option>
+                        <ng-option value="Maurice">Maurice</ng-option>
+                        <ng-option value="Mauritanie">Mauritanie</ng-option>
+                        <ng-option value="Mayotte">Mayotte</ng-option>
+                        <ng-option value="Mexique">Mexique</ng-option>
+                        <ng-option value="Micronesie">Micronesie</ng-option>
+                        <ng-option value="Midway">Midway</ng-option>
+                        <ng-option value="Moldavie">Moldavie</ng-option>
+                        <ng-option value="Monaco">Monaco</ng-option>
+                        <ng-option value="Mongolie">Mongolie</ng-option>
+                        <ng-option value="Montenegro">Montenegro</ng-option>
+                        <ng-option value="Montserrat">Montserrat</ng-option>
+                        <ng-option value="Mozambique">Mozambique</ng-option>
+                        <ng-option value="Namibie">Namibie</ng-option>
+                        <ng-option value="Nauru">Nauru</ng-option>
+                        <ng-option value="Nepal">Nepal</ng-option>
+                        <ng-option value="Nicaragua">Nicaragua</ng-option>
+                        <ng-option value="Niger">Niger</ng-option>
+                        <ng-option value="Nigeria">Nigeria</ng-option>
+                        <ng-option value="Niue">Niue</ng-option>
+                        <ng-option value="Norfolk">Norfolk</ng-option>
+                        <ng-option value="Norvege">Norvege</ng-option>
+                        <ng-option value="Nouvelle Caledonie">Nouvelle Caledonie</ng-option>
+                        <ng-option value="Nouvelle Zelande">Nouvelle Zelande</ng-option>
+                        <ng-option value="Oman">Oman</ng-option>
+                        <ng-option value="Ouganda">Ouganda</ng-option>
+                        <ng-option value="Ouzbekistan">Ouzbekistan</ng-option>
+                        <ng-option value="Pakistan">Pakistan</ng-option>
+                        <ng-option value="Palau">Palau</ng-option>
+                        <ng-option value="Palestine">Palestine</ng-option>
+                        <ng-option value="Panama">Panama</ng-option>
+                        <ng-option value="Papouasie Nouvelle Guinee">Papouasie Nouvelle Guinee</ng-option>
+                        <ng-option value="Paraguay">Paraguay</ng-option>
+                        <ng-option value="Pays Bas">Pays Bas</ng-option>
+                        <ng-option value="Perou">Perou</ng-option>
+                        <ng-option value="Philippines">Philippines</ng-option>
+                        <ng-option value="Pologne">Pologne</ng-option>
+                        <ng-option value="Polynesie">Polynesie</ng-option>
+                        <ng-option value="Porto Rico">Porto Rico</ng-option>
+                        <ng-option value="Portugal">Portugal</ng-option>
+                        <ng-option value="Qatar">Qatar</ng-option>
+                        <ng-option value="Republique Dominicaine">Republique Dominicaine</ng-option>
+                        <ng-option value="Republique Tcheque">Republique Tcheque</ng-option>
+                        <ng-option value="Reunion">Reunion</ng-option>
+                        <ng-option value="Roumanie">Roumanie</ng-option>
+                        <ng-option value="Royaume Uni">Royaume Uni</ng-option>
+                        <ng-option value="Russie">Russie</ng-option>
+                        <ng-option value="Rwanda">Rwanda</ng-option>
+                        <ng-option value="Sahara Occidental">Sahara Occidental</ng-option>
+                        <ng-option value="Sainte Lucie">Sainte Lucie</ng-option>
+                        <ng-option value="Saint Marin">Saint Marin</ng-option>
+                        <ng-option value="Salomon">Salomon</ng-option>
+                        <ng-option value="Salvador">Salvador</ng-option>
+                        <ng-option value="Samoa Occidentales">Samoa Occidentales</ng-option>
+                        <ng-option value="Samoa Americaine">Samoa Americaine</ng-option>
+                        <ng-option value="Sao Tome et Principe">Sao Tome et Principe</ng-option>
+                        <ng-option value="Senegal">Senegal</ng-option>
+                        <ng-option value="Serbie">Serbie</ng-option>
+                        <ng-option value="Seychelles">Seychelles</ng-option>
+                        <ng-option value="Sierra Leone">Sierra Leone</ng-option>
+                        <ng-option value="Singapour">Singapour</ng-option>
+                        <ng-option value="Slovaquie">Slovaquie</ng-option>
+                        <ng-option value="Slovenie">Slovenie</ng-option>
+                        <ng-option value="Somalie">Somalie</ng-option>
+                        <ng-option value="Soudan">Soudan</ng-option>
+                        <ng-option value="Sri Lanka">Sri Lanka</ng-option>
+                        <ng-option value="Suede">Suede</ng-option>
+                        <ng-option value="Suisse">Suisse</ng-option>
+                        <ng-option value="Surinam">Surinam</ng-option>
+                        <ng-option value="Swaziland">Swaziland</ng-option>
+                        <ng-option value="Syrie">Syrie</ng-option>
+                        <ng-option value="Tadjikistan">Tadjikistan</ng-option>
+                        <ng-option value="Taiwan">Taiwan</ng-option>
+                        <ng-option value="Tonga">Tonga</ng-option>
+                        <ng-option value="Tanzanie">Tanzanie</ng-option>
+                        <ng-option value="Tchad">Tchad</ng-option>
+                        <ng-option value="Thailande">Thailande</ng-option>
+                        <ng-option value="Tibet">Tibet</ng-option>
+                        <ng-option value="Timor Oriental">Timor Oriental</ng-option>
+                        <ng-option value="Togo">Togo</ng-option>
+                        <ng-option value="Trinite et Tobago">Trinite et Tobago</ng-option>
+                        <ng-option value="Tristan da cunha">Tristan de cuncha</ng-option>
+                        <ng-option value="Tunisie">Tunisie</ng-option>
+                        <ng-option value="Turkmenistan">Turkmenistan</ng-option>
+                        <ng-option value="Turquie">Turquie</ng-option>
+                        <ng-option value="Ukraine">Ukraine</ng-option>
+                        <ng-option value="Uruguay">Uruguay</ng-option>
+                        <ng-option value="Vanuatu">Vanuatu</ng-option>
+                        <ng-option value="Vatican">Vatican</ng-option>
+                        <ng-option value="Venezuela">Venezuela</ng-option>
+                        <ng-option value="Vierges Americaines">Vierges Americaines</ng-option>
+                        <ng-option value="Vierges Britanniques">Vierges Britanniques</ng-option>
+                        <ng-option value="Vietnam">Vietnam</ng-option>
+                        <ng-option value="Wake">Wake</ng-option>
+                        <ng-option value="Wallis et Futuma">Wallis et Futuma</ng-option>
+                        <ng-option value="Yemen">Yemen</ng-option>
+                        <ng-option value="Zambie">Zambie</ng-option>
+                        <ng-option value="Zimbabwe">Zimbabwe</ng-option>
+                      </ng-select>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <div class="form-group">
+                  <label><b>Commentaires</b></label>
+                  <textarea [(ngModel)]="developer.note" class="form-control" name="note"
+                            rows="5"></textarea>
+                </div>
+                <div class="form-group">
+
+
+                  <button type="submit" color="primary" mat-raised-button style="margin: 5px">Enregistrer
+                  </button>
+
+
+                  <button (click)="convertToResource()" mat-raised-button *ngIf="!developer.resource && editing"
+                          color="primary" type="button" style="margin: 5px">Convertir En Resource
+                  </button>
+                  <button color="warn" mat-raised-button routerLink="/developers"
+                          type="reset">Annuler
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+    <div *ngIf="editing" class="col">
+      <app-personal-info></app-personal-info>
+    </div>
+
+    <div *ngIf="editing" class="col">
+      <app-action></app-action>
+    </div>
+
+  </div>
+</div>
+

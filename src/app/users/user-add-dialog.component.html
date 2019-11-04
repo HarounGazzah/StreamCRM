@@ -1,0 +1,125 @@
+<div class="container tab-pane fade show active" role="tabpanel">
+  <div class="row">
+    <div class="col border">
+      <div class="row">
+        <mat-toolbar color="primary" role="header" style="height: 20px !important; min-height: 40px !important;">
+          <mat-icon>add</mat-icon>
+          Créer un utilisateur
+        </mat-toolbar>
+      </div>
+      <div class="row">
+        <div class="col border">
+          <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+
+            <div class="form-group">
+              <mat-form-field class="example-container">
+              <input matInput #firstname_input="ngModel" [(ngModel)]="user.firstname"
+                                        placeholder="Nom"
+                                        name="firstname"
+                                        required/>
+              </mat-form-field>
+
+              <app-field-error-display
+                [displayError]="form.submitted && firstname_input.invalid"
+                [model]="firstname_input"
+                fieldName="Nom">
+              </app-field-error-display>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-container">
+
+              <input #lastname_input="ngModel"
+                     matInput
+                     [(ngModel)]="user.lastname"
+                     placeholder="Prénom"
+                     name="lastname"
+                     required/>
+              </mat-form-field>
+              <app-field-error-display
+                [displayError]="form.submitted && lastname_input.invalid"
+                [model]="lastname_input"
+                fieldName="Prénom">
+              </app-field-error-display>
+            </div>
+
+            <div class="form-group">
+
+              <mat-form-field class="example-container">
+              <input matInput
+                     #password_input="ngModel"
+                     [(ngModel)]="user.password" minlength="8" name="mdp"
+                     placeholder="Mot de Passe"
+                     required reverse="true" type="password"/>
+              <app-field-error-display
+                [displayError]="form.submitted && password_input.invalid"
+                [model]="password_input"
+                fieldName="Mot de Passe">
+              </app-field-error-display>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+
+              <mat-form-field class="example-container">
+              <input matInput #confirmPassword_input="ngModel" [(ngModel)]="user.confirmPassword"
+                     minlength="8" placeholder="Confirmation du Mot de Passe"
+                     name="confirmPassword" required type="password"
+                     validateEqual="mdp" >
+              <app-field-error-display
+                [displayError]="form.submitted && confirmPassword_input.invalid"
+                [model]="confirmPassword_input"
+                fieldName="Confirmation du Mot de Passe">
+              </app-field-error-display>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+
+              <mat-form-field class="example-container">
+              <input matInput #email_input="ngModel" [(ngModel)]="user.email" class="form-control"
+                     email name="mail" placeholder="Email" required>
+              <app-field-error-display
+                [displayError]="form.submitted && email_input.invalid"
+                [model]="email_input"
+                fieldName="Email">
+              </app-field-error-display>
+              </mat-form-field>
+            </div>
+
+
+            <div *ngIf="!currentUser" class="form-group">
+              <label>Roles</label>
+
+              <ng-select [(ngModel)]="user.roles" [hideSelected]="true" [multiple]="true"
+                         bindValue="label" id="roles" name="roles" required>
+
+                <ng-option value="ROLE_ADMIN">Admin</ng-option>
+                <ng-option value="ROLE_CLIENT">Client</ng-option>
+                <ng-option value="ROLE_RESOURCE">Resource</ng-option>
+
+              </ng-select>
+            </div>
+
+            <div class="form-group">
+
+              <button
+                style="margin: 10px" type="submit"
+                color="primary"
+                mat-raised-button
+                type="submit">Créer
+              </button>
+
+              <button
+                color="warn"
+                mat-raised-button
+                (click)="onClose()"
+                type="reset">Annuler
+              </button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

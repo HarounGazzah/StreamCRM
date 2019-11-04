@@ -1,0 +1,91 @@
+<div class="container" style="width: 90%;">
+
+  <div class="col-md-8">
+
+    <table class="table" style="box-shadow: 5px 5px 5px gray;">
+      <thead><h4>Status</h4></thead>
+      <tbody>
+      <tr>
+        <th scope="row"><b>Status</b></th>
+        <td><select disabled  [(ngModel)]="developer.stage" class="form-control"
+                    name="stage">
+          <option *ngFor="let stage of stages" [ngValue]="stage.value">{{stage.label}}</option>
+        </select></td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Dériger par</b></th>
+        <td> <select disabled  [(ngModel)]="developer.managerReference"
+                     class="form-control" name="manager">
+          <option *ngFor="let user of users" [ngValue]="user.reference">{{user.firstname}}
+            {{user.lastname}}
+          </option>
+        </select></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-striped" style="box-shadow: 5px 5px 5px gray;">
+      <thead><h4>Candidat</h4></thead>
+
+      <tbody>
+      <tr>
+        <th scope="row"><b>Reference</b></th>
+        <td>{{ developer.reference}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Nom</b></th>
+        <td>{{ developer.firstname}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Prenom</b></th>
+        <td>{{ developer.lastname}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Date de naissance</b></th>
+        <td>{{ personalInfo.birthDate}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Lieu de naissance</b></th>
+        <td>{{ personalInfo.placeOfBirth}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Nationalité</b></th>
+        <td>{{ personalInfo.nationality}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Numéro de sécurité sociale</b></th>
+        <td>{{ personalInfo.socialSecurityNumber}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Adresse</b></th>
+        <td>{{ contact.address}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Code postal</b></th>
+        <td>{{ contact.npa}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Ville</b></th>
+        <td>{{ contact.city}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>E-mail</b></th>
+        <td>{{ contact.email1}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Numero telephone</b></th>
+        <td>{{ contact.tel1}}</td>
+      </tr>
+      <tr>
+        <th scope="row"><b>Fax</b></th>
+        <td>{{ contact.fax}}</td>
+      </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+  <div class="float-right" style="margin-top: -87%; margin-right: -30%; width: 700px;">
+    <app-action></app-action>
+  </div>
+</div>

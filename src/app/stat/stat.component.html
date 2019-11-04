@@ -1,0 +1,33 @@
+<br><br>
+<div class="container">
+  <div>
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+
+    </canvas>
+  </div>
+  <div class="row" style="display: -webkit-box;">
+    <div style="width: 600px">
+      <canvas baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              [options]="pieChartOptions"
+              [legend]="pieChartLegend">
+      </canvas>
+    </div>
+    <div style="width: 600px">
+      <canvas baseChart
+              [data]="pieChartData2"
+              [labels]="pieChartLabels2"
+              [chartType]="pieChartType"
+              [options]="pieChartOptions"
+              [legend]="pieChartLegend">
+      </canvas>
+    </div>
+  </div>
+</div>

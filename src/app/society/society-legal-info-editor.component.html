@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col">
+<mdb-card>
+
+<div class="row">
+  <div class="col">
+    <mdb-card>
+      <mdb-card-header>Informations légales </mdb-card-header>
+    </mdb-card>
+  </div>
+
+</div>
+<mdb-card-body>
+
+<div class="row">
+  <div class="col">
+    <form novalidate #form="ngForm" (ngSubmit)="save(form)">
+
+      <div class="form-group">
+        <label>TVA </label>
+        <input class="form-control"
+               name="tva"
+               [(ngModel)]="legalInfo.tva"/>
+      </div>
+
+      <div class="form-group">
+        <label>Siret</label>
+        <input class="form-control"
+               name="siret"
+               [(ngModel)]="legalInfo.siret"/>
+      </div>
+      <div class="form-group">
+        <label>Statut juridique</label>
+        <input class="form-control"
+               name="legalStatus"
+               [(ngModel)]="legalInfo.legalStatus"/>
+      </div>
+      <div class="form-group">
+        <label>RCS</label>
+        <input class="form-control"
+               name="rcs"
+               [(ngModel)]="legalInfo.rcs"/>
+      </div>
+      <div class="form-group">
+        <label>Code APE </label>
+        <input class="form-control"
+               name="apeCode"
+               [(ngModel)]="legalInfo.apeCode"/>
+      </div>
+
+
+      <div class="form-group">
+        <button
+          style="margin: 10px" type="submit"
+          color="primary"
+          mat-raised-button
+          type="submit">Enregistrer
+        </button>
+
+
+
+      </div>
+    </form>
+  </div>
+</div>
+</mdb-card-body>
+</mdb-card>
+  </div>
+</div>

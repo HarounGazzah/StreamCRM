@@ -1,0 +1,63 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper">
+
+
+</div>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap Js CDN -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- jQuery Custom Scroller CDN -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+<div class="container-fluid">
+
+  <div class="p-2  text-white "
+       style="font-size: 15px; height:40px; background-color: #4267b2; box-shadow: 2px 2px 2px grey; border-radius: 5px; text-align: center;"><h5>
+    Fiche - {{developer.firstname}} {{developer.lastname}}</h5></div>
+  <br>
+
+  <nav mat-tab-nav-bar>
+
+    <a #gle="routerLinkActive" [active]="gle.isActive"
+       animationDuration="2000ms"
+       mat-tab-link routerLink="general"
+       routerLinkActive>
+      Informations Général
+    </a>
+    <a #coor="routerLinkActive" [active]="coor.isActive"
+
+       animationDuration="2000ms"
+       mat-tab-link routerLink="contact"
+       routerLinkActive>
+      Coordonnées
+    </a>
+    <a #skill="routerLinkActive" [active]="skill.isActive"
+       animationDuration="2000ms"
+       mat-tab-link routerLink="skills"
+       routerLinkActive>
+      Compétences
+    </a>
+    <a #contr="routerLinkActive" [active]="contr.isActive"
+       animationDuration="2000ms"
+       mat-tab-link routerLink="contract"
+       routerLinkActive>
+      Contrat
+    </a>
+
+    <a #eva="routerLinkActive" [active]="eva.isActive"
+       animationDuration="2000ms"
+       mat-tab-link routerLink="evaluation"
+       routerLinkActive>
+      Evaluations
+    </a>
+  </nav>
+
+  <br/>
+<div class="tab-content" id="pills-tabContent">
+  <router-outlet></router-outlet>
+</div>
+</div>

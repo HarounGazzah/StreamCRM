@@ -1,0 +1,207 @@
+<!--<div class="container tab-pane fade show active" role="tabpanel">-->
+<div style="font-size: small;" class="container-fluid">
+
+  <div class="row">
+    <div class="col">
+      <mdb-card>
+      <div class="row">
+        <div class="col">
+        <mdb-card>
+          <mdb-card-header>Informations <label class="float-right" *ngIf="editing">Crée le {{ society.createdDate | date }} à {{ society.createdDate | date:'hh:mm' }}</label></mdb-card-header>
+        </mdb-card>
+        </div>
+
+      </div>
+      <mdb-card-body>
+
+      <div class="row">
+        <div class="col">
+          <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+<!--            <div *ngIf="editing" class="form-group">-->
+<!--              <label>Date de Création: </label>-->
+<!--              <input class="form-control-plaintext" name="createdDate" readonly-->
+<!--                     style="width: 70%" type="text"-->
+<!--                     value="{{society.createdDate | date:'long'}}"/>-->
+<!--            </div>-->
+
+<!--            <div class="form-group">-->
+
+
+              <table class="table table-striped">
+                <thead></thead>
+                <tbody>
+                <tr>
+                  <th scope="row"><b>Société</b></th>
+                  <td>
+                    <input #label_input="ngModel" [(ngModel)]="society.label" class="form-control"
+                           name="label"
+                           required/>
+                    <app-field-error-display
+                      [displayError]="form.submitted && label_input.invalid"
+                      [model]="label_input"
+                      fieldName="Label">
+                    </app-field-error-display>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Effectif</b></th>
+                  <td>
+                    <input [(ngModel)]="society.staffNumber"
+                           class="form-control"
+                           name="staffNumber"
+                           type="number"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Etat</b></th>
+                  <td>
+                    <select [(ngModel)]="society.stage" class="form-control"
+                            name="stage">
+                      <option *ngFor="let stage of stages" [ngValue]="stage.value">{{stage.label}}</option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Secteur d'activité</b></th>
+                  <td>
+                    <select [(ngModel)]="society.activityArea" class="form-control"
+                            name="activityArea">
+                      <option value="Other">Autres</option>
+                      <option value="Aerospace">Aéronautique</option>
+                      <option value="Aerospace">Aérospatial</option>
+                      <option value="Agri">Agroalimentaire</option>
+                      <option value="Insurance">Assurance</option>
+                      <option value="Automobile">Automobile</option>
+                      <option value="Bank">Banque</option>
+                      <option value="Buildings">Bâtiments</option>
+                      <option value="Biomedical">Biomédical</option>
+                      <option value="Chemistry">Chimie</option>
+                      <option value="Advice">Conseil</option>
+                      <option value="Defense">Défense</option>
+                      <option value="SoftwarePublishing">Edition de logiciels</option>
+                      <option value="Energy">Energie</option>
+                      <option value="Environment">Environnement</option>
+                      <option value="Rail">Ferroviaire</option>
+                      <option value="LargeDistribution">Grande distribution</option>
+                      <option value="Infrastructure">Infrastructure</option>
+                      <option value="Logistics">Logistique</option>
+                      <option value="Media">Média</option>
+                      <option value="MetalSteelIndustry">Métallurgie/sidérurgie</option>
+                      <option value="Naval">Naval</option>
+                      <option value="Nuclear">Nucléaire</option>
+                      <option value="OilAndGas">Oil &amp; Gaz</option>
+                      <option value="Petrochemicals">Pétrochimie</option>
+                      <option value="Pharmacy">Pharmacie</option>
+                      <option value="Health">Santé</option>
+                      <option value="PublicSector">Secteur public</option>
+                      <option value="Services">Services</option>
+                      <option value="Telecommunications">Télécommunications</option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Responsable Manager</b></th>
+                  <td>
+                    <select [(ngModel)]="society.managerReference"
+                            class="form-control" name="manager">
+                      <option *ngFor="let user of users" [ngValue]="user.reference">{{user.firstname}}
+                        {{user.lastname}}
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Services</b></th>
+                  <td>
+                    <input [(ngModel)]="serviceTitle" class="form-control"
+                           name="qualifTitle" placeholder="Service ..."/>
+                  </td>
+                  <td>
+                    <span>
+                <button (click)="addService()" [disabled]="!serviceTitle"
+                        class="btn btn-primary fa fa-plus" type="button"></button>
+                </span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+
+<!--            <div class="form-row">-->
+<!--              <div class="form-group col-md-10">-->
+<!--                <input [(ngModel)]="serviceTitle" class="form-control"-->
+<!--                       name="qualifTitle" placeholder="Service ..."/>-->
+<!--              </div>-->
+<!--              <div class="col-md-2">-->
+<!--                <span>-->
+<!--                <button (click)="addService()" [disabled]="!serviceTitle"-->
+<!--                        class="btn btn-primary fa fa-plus" type="button"></button>-->
+<!--                </span>-->
+<!--              </div>-->
+<!--            </div>-->
+
+            <table class="table table-striped table-sm">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th class="col-md-6" scope="col">Liste des services</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let service of society.services; let i=index">
+                <td>{{i + 1}}</td>
+                <td class="col-md-6">{{service}}</td>
+                <td>
+                  <button (click)="removeService(i)"
+                          class="btn btn-sm btn-danger">Supprimer
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div class="form-group">
+              <label>Commentaires</label>
+              <textarea [(ngModel)]="society.note" class="form-control" name="note"
+                        rows="5"></textarea>
+            </div>
+
+            <div class="form-group">
+              <button
+                style="margin: 10px" type="submit"
+                color="primary"
+                mat-raised-button
+                type="submit">Enregistrer
+              </button>
+<!--              <button [class.btn-warning]="editing" class="btn btn-primary"-->
+<!--                      type="submit">Enregistrer-->
+<!--              </button>-->
+
+              <button
+                routerLink="/societies"
+                type="reset"
+                color="warn"
+                mat-raised-button>Annuler
+              </button>
+
+<!--              <button class="btn btn-secondary" routerLink="/societies"-->
+<!--                      type="reset">Annuler-->
+<!--              </button>-->
+            </div>
+          </form>
+        </div>
+      </div>
+      </mdb-card-body>
+      </mdb-card>
+    </div>
+    <div *ngIf="editing" class="col">
+      <app-legal-info></app-legal-info>
+    </div>
+  </div>
+</div>

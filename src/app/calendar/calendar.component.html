@@ -1,0 +1,245 @@
+
+    <div class="container">
+      <mdb-card>
+        <mdb-card-header> Nouvelle feuille de temps</mdb-card-header>
+        <mdb-card-body>
+          <div class="row">
+            <div class="col-md-9">
+            <ng-select [items]="projects" bindLabel="client" [(ngModel)]="selectedProject" placeholder="Choisir un projet">
+            </ng-select>
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-primary" (click)="resetMonth()">Remplir</button>
+          </div>
+          </div>
+                   
+          <div id="calendar" class="page-layout simple fullwidth"><br />
+            <!-- HEADER -->
+            <div class="header p-16 p-sm-24" [ngClass]="viewDate | date:'MMM'">
+              <div class="header-content" fxLayout="column" fxLayoutAlign="space-between">
+                <div class="header-top" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column">
+                  <!-- TOOLBAR -->
+                </div>
+                <!-- / TOOLBAR -->
+                <!-- HEADER BOTTOM -->
+                
+                <div class="header-bottom" fxLayout="row" fxLayoutAlign="center center"
+                  [@animate]="{value:'*',params:{delay:'150ms'}}">
+  
+                  <button mat-icon-button class="arrow" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                    (viewDateChange)="selectedDay = {date:$event}" aria-label="Previous">
+                    <mat-icon>chevron_left</mat-icon>
+                  </button>
+  
+                  <h3>
+                    {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
+                  </h3>
+  
+                  <button mat-icon-button class="arrow" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                    (viewDateChange)="selectedDay = {date:$event}" aria-label="Next">
+                    <mat-icon>chevron_right</mat-icon>
+                  </button>
+                </div>
+                <!-- / HEADER BOTTOM -->
+              </div>
+  
+  
+            </div>
+            <!-- / HEADER -->
+            
+            
+
+            <!-- CONTENT -->
+            <div class="content" fusePerfectScrollbar [@animate]="{value:'*',params:{delay:'200ms',y:'50px'}}">
+
+                <ng-template #customCellTemplate let-day="day" let-locale="locale">
+                    <div class="cal-cell-top">
+                      <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">
+                        {{ day.badgeTotal }}
+                        </span>
+                      <span class="cal-day-number">
+                        {{ day.date | calendarDate:'monthViewDayNumber':locale }}
+                        </span>
+                    </div>
+
+                    <small style="margin: 5px" class="cal-day-badge ng-tns-c3-0 ng-star-inserted"
+                      style="max-width: 30px; margin-bottom: 2px; background-color: green" *ngIf="day.events.length > 0 && day.events[0].temp.value == 1">
+                      {{ day.events[0].temp.value }}
+                    </small>
+
+                    <small style="margin: 5px" class="cal-day-badge ng-tns-c3-0 ng-star-inserted"
+                        style="max-width: 30px; margin-bottom: 2px; background-color: blue" *ngIf="day.events.length > 0 && day.events[0].temp.value == 0.5">
+                        {{ day.events[0].temp.value }}
+                    </small>
+
+                    <small style="margin: 5px" class="cal-day-badge ng-tns-c3-0 ng-star-inserted"
+                        style="max-width: 30px; margin-bottom: 2px; background-color: red" *ngIf="day.events.length > 0 && day.events[0].temp.value == -1">
+                        {{ day.events[0].temp.value }}
+                    </small>
+
+                  </ng-template>
+
+              <div [ngSwitch]="view">
+                
+                <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+                  [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event) ;
+           addEvent()" (eventClicked)="editEvent('edit', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
+                  (beforeViewRender)="beforeMonthViewRender($event)" [cellTemplate]="customCellTemplate">
+                </mwl-calendar-month-view>
+  
+                <!-- removed (eventClicked)="editEvent('edit', $event)" --> 
+                <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate"
+                  (viewDateChange)="selectedDay = {date:$event}" [events]="events" [refresh]="refresh"
+                  (dayClicked)="dayClicked($event)" 
+                  (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-week-view>
+  
+  
+                <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate"
+                  (viewDateChange)="selectedDay = {date:$event}" [events]="events" [refresh]="refresh"
+                  (dayClicked)="dayClicked($event.day)" (eventClicked)="editEvent('edit', $event.event)"
+                  (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-day-view>
+              </div>
+            </div>
+            <button class="btn btn-primary" (click)="validateTimeSheet()">Valider</button>
+            <!-- / CONTENT -->
+  
+  
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-4">
+  
+                <mat-card style="background-color: #dee2e6">
+                  <div class="title">
+                    <strong>Total</strong>
+                  </div>
+                  <table style="background-color:#FFFFFF"  class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th colspan="3">Production</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="2">
+                          <strong>Total</strong>
+                        </td>
+                        <td>
+                          <strong>{{total.production}} Jours</strong>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-card>
+  
+              </div>
+  
+              <div class="col-xs-12 col-sm-12 col-md-4">
+  
+                <mat-card style="background-color: #dee2e6">
+                  <div class="title">
+                    <strong>Total</strong>
+                  </div>
+                  <table style="background-color:#FFFFFF"  class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th colspan="3">Absence</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="2">
+                          <strong>Total</strong>
+                        </td>
+                        <td>
+                          <strong>{{total.absence}} Jours</strong>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-card>
+  
+              </div>
+  
+              <div class="col-xs-12 col-sm-12 col-md-4">
+  
+                <mat-card style="background-color: #dee2e6">
+                  <div class="title">
+                    <strong>Total</strong>
+                  </div>
+                  <table style="background-color:#FFFFFF"  class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th colspan="3">Interne</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="2">
+                          <strong>Total</strong>
+                        </td>
+                        <td>
+                          <strong>{{total.interne}} Jours</strong>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-card>
+  
+              </div>
+            </div>
+  
+            <div class="row" style="margin-top: 20px">
+              <div class="col-xs-12 col-sm-6 ">
+                <mat-card>
+                  <div class="title">
+                    <strong>Commentaires</strong>
+  
+                  </div>
+                  <textarea class="form-control" name="note" rows="5"></textarea>
+  
+  
+                </mat-card>
+  
+              </div>
+  
+  
+              <div class="col-xs-12 col-sm-6 ">
+                <mat-card>
+                  <div class="title">
+                    <strong>Piéces jointes</strong>
+  
+  
+                  </div>
+                  <textarea class="form-control" name="note" rows="5"></textarea>
+                </mat-card>
+  
+              </div>
+            </div>
+          </div>
+  
+          <div class="row" style="margin-top: 20px">
+            <div class="col-xs-12 col-sm-12 ">
+  
+              <mat-card style="background-color: #dee2e6">
+                <div class="title">
+                  <strong>Validations</strong>
+                </div>
+                <div>
+  
+  
+                  <!--<li *ngIf="isLoggedIn() && !isAdmin() && user$">
+                    <a> Circuit de validation en cours : {{user.firstname }} {{user.lastname}} > {{ manager.firstname }} {{ manager.lastname }} </a>
+                  </li>
+                  -->
+                </div>
+              </mat-card>
+  
+            </div>
+          </div>
+  
+  
+        </mdb-card-body>
+  
+      </mdb-card>
+    </div>

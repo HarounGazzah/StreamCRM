@@ -1,0 +1,41 @@
+<div class="container-fluid">
+
+  <nav mat-tab-nav-bar>
+
+    <a #gle="routerLinkActive" [active]="gle.isActive"
+       animationDuration="2000ms"
+       mat-tab-link routerLink="general"
+       routerLinkActive>
+      Informations Général
+    </a>
+    <a #coor="routerLinkActive" [active]="coor.isActive"
+
+       animationDuration="2000ms"
+       mat-tab-link routerLink="contact"
+       routerLinkActive>
+      Coordonnées de la Société
+    </a>
+    <a #act="routerLinkActive" [active]="act.isActive"
+
+       animationDuration="2000ms"
+       mat-tab-link routerLink="action"
+       routerLinkActive>
+      Actions
+    </a>
+    <a #con="routerLinkActive" [active]="con.isActive"
+
+       animationDuration="2000ms"
+       mat-tab-link routerLink="contacts"
+       routerLinkActive>
+      Contacts
+    </a>
+
+  </nav>
+
+  <br>
+  <div class="tab-content" id="pills-tabContent">
+
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

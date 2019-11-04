@@ -1,0 +1,25 @@
+
+<div class="p-2  text-white "
+     style="font-size: 15px; height:40px; background-color: #4267b2; box-shadow: 2px 2px 2px grey; border-radius: 5px; text-align: center;"><h5>
+  Liste des actions</h5></div>
+<br>
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Date de creation</th>
+      <th scope="col">Responsable</th>
+      <th scope="col">Note</th>
+    </tr>
+
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let a of actions">
+      <td>{{a.createdDate | date}}</td>
+      <td>{{a.responsibleFullName}}</td>
+      <td>{{a.note}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

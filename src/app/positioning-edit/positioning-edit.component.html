@@ -1,0 +1,229 @@
+<div class="container">
+  <div class="row">
+    <mdb-card style="width: 100%;">
+      <mdb-card-header><b>Informations de positionnement</b> <span
+        class="float-right"><b>Crée le {{positioning.createdDate | date}}
+        à {{positioning.createdDate | date:"HH:mm"}}</b> </span></mdb-card-header>
+      <mdb-card-body>
+        <form #form="ngForm" (ngSubmit)="updatePostioning(form)">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+
+                <table class="table table-striped">
+                  <thead></thead>
+                  <tbody>
+
+                  <tr *ngIf="positioning.stage == 'Won'">
+                    <th scope="row"><b>Etat</b></th>
+                    <td>
+                      <input matInput
+                             name="stg"
+                             readonly="true"
+                             type="text">Gagné
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="positioning.stage != 'Won'">
+                    <th scope="row"><b>Etat</b></th>
+                    <td>
+                      <select [(ngModel)]="positioning.stage" class="form-control"
+                              name="stage">
+
+                        <option *ngFor="let stage of stages" [value]="stage.value">{{stage.label}}</option>
+                      </select>
+
+                    </td>
+                  </tr>
+
+
+                  <tr>
+                    <th scope="row"><b>Titre du besoin </b></th>
+                    <td>
+                      <input [(ngModel)]="positioning.needTitle" matInput
+                             name="project"
+                             placeholder="Nom de besoin" readonly="true"
+                             type="text">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><b>Ressource</b></th>
+                    <td>
+                      <input [(ngModel)]="positioning.resourceFullName" matInput
+                             name="resource"
+                             placeholder="Resource" readonly="true"
+                             type="text">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><b>Client</b></th>
+                    <td>
+                      <input [(ngModel)]="positioning.client" matInput
+                             name="society"
+                             placeholder="Client - Contact" readonly="true"
+                             type="text">
+                    </td>
+                  </tr>
+                  <tr>
+
+
+                    <th scope="row"><b>Responsable</b></th>
+                    <td>
+                      <select [(ngModel)]="positioning.responsibleFullName" class="form-control"
+                              name="responsible">
+                        <option *ngFor="let user of users"
+                                [value]="user.value">{{user.firstname}} {{user.lastname}}</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><b>Commentaire</b></th>
+                    <td>
+                      <textarea style="border: 1px solid #c4cfe7; border-radius: 5px" rows="10"
+                                [(ngModel)]="positioning.note" matInput
+                                name="note"
+                                placeholder="Commentaire"
+                                type="text"></textarea>
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+
+
+              </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <mat-form-field class="example-container">
+
+                  <input
+                    [(ngModel)]="positioning.startDate"
+                    [matDatepicker]="picker"
+                    matInput
+                    name="startDate"
+                    placeholder="Date de début"
+                    required>
+                  <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+
+              <div class="form-group">
+                <mat-form-field class="example-container">
+                  <input [(ngModel)]="positioning.endDate"
+                         [matDatepicker]="picker2"
+                         matInput
+                         name="endDate"
+                         placeholder="Date de fin"
+                         required>
+                  <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field class="example-container">
+
+                  <input [(ngModel)]="positioning.freeDays" matInput
+                         name="freeDays"
+                         placeholder="Jours gratuits"
+                         required
+                         type="number">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field class="example-container">
+                  <input [(ngModel)]="positioning.invoicedDays" matInput
+                         name="invoicedDays"
+                         placeholder="Jours facturés"
+                         required
+                         type="number">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field class="example-container">
+                  <input [(ngModel)]="positioning.cjm"
+                         matInput
+                         name="cjm"
+                         placeholder="CJM"
+                         required
+                         type="number">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field class="example-container">
+                  <input [(ngModel)]="positioning.tjm" class="form-control" matInput
+                         name="tjm"
+                         placeholder="TJM"
+                         required
+                         type="number">
+                </mat-form-field>
+              </div>
+
+              <div style="position: absolute; position: absolute; margin-top: -102.5%; margin-left: -170%;">
+                <mdb-card>
+                  <mdb-card-header><b>Informations complémentaires</b></mdb-card-header>
+                  <mdb-card-body>
+                    CA de cette période = {{ periodCA }} €<br>
+                    Coût de cette période = {{ periodCost }} €<br>
+                    Marge de cette période = {{ periodMargin }} €<br>
+                    Rentabilité de cette période = {{periodProfitability | number:'2.1-2'}} %
+                  </mdb-card-body>
+                </mdb-card>
+              </div>
+
+
+            </div>
+            <div class="form-group">
+              <button color="primary" mat-raised-button
+                      style="margin: 3px" type="submit">
+                <mat-icon>save_outline</mat-icon>
+                Enregistrer
+              </button>
+
+              <button (click)="convertToProject()" [disabled]="positioning.stage == 'Won'" color="accent"
+                      mat-raised-button
+                      style="margin: 3px"
+                      type="button">
+                <mat-icon>directions</mat-icon>
+                Convertit en projet
+              </button>
+
+              <button color="warn" mat-raised-button
+                      routerLink="/positionings" style="margin: 3px" type="reset">
+                <mat-icon>cancel</mat-icon>
+                Retour
+              </button>
+
+              <button color="primary" mat-raised-button
+                      (click)="downloadPDF()" style="margin: 3px" type="button">
+                <i class="fa-file-pdf"></i>
+                <mat-icon>file_copy</mat-icon>
+                Exporter en PDF
+              </button>
+
+
+            </div>
+          </div>
+        </form>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+</div>
+
+
+
+
+

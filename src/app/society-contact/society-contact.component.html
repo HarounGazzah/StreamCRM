@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="col">
+    <h5 class="text-dark dropdown-header">Contacts de la Société</h5>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <div aria-orientation="vertical" class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
+        <a class="nav-link" data-toggle="pill"
+           role="tab" routerLink="general" routerLinkActive="active">
+          Informations Général</a>
+        <a class="nav-link" data-toggle="pill"
+           id="dev-contact-tab" role="tab" routerLink="contact"
+           routerLinkActive="active">Coordonnées du contact</a>
+        <a class="nav-link" data-toggle="pill"
+           role="tab" routerLink="action" routerLinkActive="active">Actions</a>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="tab-content" id="pills-tabContent">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

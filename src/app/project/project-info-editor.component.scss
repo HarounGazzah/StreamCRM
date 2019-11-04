@@ -1,0 +1,41 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.mat-select {
+  ::ng-deep .mat-select-content {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-select-value {
+    color: green /*!important*/
+  ;
+  }
+}
+
+.mat-select-disabled {
+  ::ng-deep .mat-select-value {
+    color: black /*!important*/
+  ;
+  }
+}
+
+.input-disabled {
+  ::ng-deep input-value {
+    color: black /*!important*/
+  ;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-input-element{
+  width: 100%;
+}

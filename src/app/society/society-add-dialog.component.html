@@ -1,0 +1,264 @@
+<div class="container">
+  <div class="row">
+    <div class="col border" style="border-radius: 5%;">
+      <div class="row">
+        <mat-toolbar color="primary" role="header" style="height: 20px !important; min-height: 40px !important;">
+          <mat-icon>add</mat-icon>
+          Créer une société
+        </mat-toolbar>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col">
+      <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="form-group">
+          <mat-form-field class="example-container">
+            <input #label_input="ngModel" [(ngModel)]="society.label"
+                   matInput
+                   name="label"
+                   placeholder="Société"
+                   minlength="3"
+                   type="text"
+                   required/>
+
+          </mat-form-field>
+              <small *ngIf="label_input.invalid && form.submitted" class="text-danger">min 3 caract</small>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+
+          <div class="form-group">
+          <mat-form-field class="example-container">
+            <input [(ngModel)]="society.staffNumber"
+                   matInput
+                   name="staffNumber"
+                   required
+                   placeholder="Effectif"
+                   type="number"/>
+          </mat-form-field>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row" style="margin-top: 10px">
+        <div class="col-md-6">
+
+          <div class="form-group">
+          <mat-select [(ngModel)]="society.activityArea"
+                      name="activityArea"
+                      required
+                      placeholder="Secteur d'activité">
+            <mat-option value="Other">Autres</mat-option>
+            <mat-option value="Aerospace">Aéronautique</mat-option>
+            <mat-option value="Aerospace">Aérospatial</mat-option>
+            <mat-option value="Agri">Agroalimentaire</mat-option>
+            <mat-option value="Insurance">Assurance</mat-option>
+            <mat-option value="Automobile">Automobile</mat-option>
+            <mat-option value="Bank">Banque</mat-option>
+            <mat-option value="Buildings">Bâtiments</mat-option>
+            <mat-option value="Biomedical">Biomédical</mat-option>
+            <mat-option value="Chemistry">Chimie</mat-option>
+            <mat-option value="Advice">Conseil</mat-option>
+            <mat-option value="Defense">Défense</mat-option>
+            <mat-option value="SoftwarePublishing">Edition de logiciels</mat-option>
+            <mat-option value="Energy">Energie</mat-option>
+            <mat-option value="Environment">Environnement</mat-option>
+            <mat-option value="Rail">Ferroviaire</mat-option>
+            <mat-option value="LargeDistribution">Grande distribution</mat-option>
+            <mat-option value="Infrastructure">Infrastructure</mat-option>
+            <mat-option value="Logistics">Logistique</mat-option>
+            <mat-option value="Media">Média</mat-option>
+            <mat-option value="MetalSteelIndustry">Métallurgie/sidérurgie</mat-option>
+            <mat-option value="Naval">Naval</mat-option>
+            <mat-option value="Nuclear">Nucléaire</mat-option>
+            <mat-option value="OilAndGas">Oil &amp; Gaz</mat-option>
+            <mat-option value="Petrochemicals">Pétrochimie</mat-option>
+            <mat-option value="Pharmacy">Pharmacie</mat-option>
+            <mat-option value="Health">Santé</mat-option>
+            <mat-option value="PublicSector">Secteur public</mat-option>
+            <mat-option value="Services">Services</mat-option>
+            <mat-option value="Telecommunications">Télécommunications</mat-option>
+          </mat-select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+
+          <div class="form-group">
+          <mat-select [(ngModel)]="society.managerReference"
+                      name="manager"
+                      required
+                      placeholder="Responsable Manager">
+            <mat-option *ngFor="let user of users" [value]="user.reference">{{user.firstname}}
+              {{user.lastname}}
+            </mat-option>
+          </mat-select>
+          </div>
+        </div>
+        <hr>
+<br/>
+
+<!--        [disabled]="form.form.invalid"-->
+
+        <div class="form-group">
+          <button
+                  style="margin: 10px" type="submit"
+                  color="primary"
+                  mat-raised-button
+                  type="submit">Créer
+          </button>
+          <button
+                  color="warn"
+                  mat-raised-button
+                  (click)="onClose()"
+                  type="reset">Annuler
+          </button>
+        </div>
+
+      </div>
+      </form>
+    </div>
+  </div>
+  <!--    <mdb-card>-->
+  <!--      <mdb-card-body>-->
+
+  <!--        <div class="row">-->
+  <!--          <div class="col">-->
+  <!--            <form #form="ngForm" (ngSubmit)="save(form)" novalidate>-->
+  <!--              &lt;!&ndash;            <div *ngIf="editing" class="form-group">&ndash;&gt;-->
+  <!--              &lt;!&ndash;              <label>Date de Création: </label>&ndash;&gt;-->
+  <!--              &lt;!&ndash;              <input class="form-control-plaintext" name="createdDate" readonly&ndash;&gt;-->
+  <!--              &lt;!&ndash;                     style="width: 70%" type="text"&ndash;&gt;-->
+  <!--              &lt;!&ndash;                     value="{{society.createdDate | date:'long'}}"/>&ndash;&gt;-->
+  <!--              &lt;!&ndash;            </div>&ndash;&gt;-->
+
+  <!--              &lt;!&ndash;            <div class="form-group">&ndash;&gt;-->
+
+
+  <!--              <table class="table table-striped">-->
+  <!--                <thead></thead>-->
+  <!--                <tbody>-->
+  <!--                <tr>-->
+  <!--                  <th scope="row"><b>Société</b></th>-->
+  <!--                  <td>-->
+  <!--                    <input #label_input="ngModel" [(ngModel)]="society.label" class="form-control"-->
+  <!--                           name="label"-->
+  <!--                           required/>-->
+  <!--                    <app-field-error-display-->
+  <!--                      [displayError]="form.submitted && label_input.invalid"-->
+  <!--                      [model]="label_input"-->
+  <!--                      fieldName="Label">-->
+  <!--                    </app-field-error-display>-->
+  <!--                  </td>-->
+  <!--                </tr>-->
+
+  <!--                <tr>-->
+  <!--                  <th scope="row"><b>Effectif</b></th>-->
+  <!--                  <td>-->
+  <!--                    <input [(ngModel)]="society.staffNumber"-->
+  <!--                           class="form-control"-->
+  <!--                           name="staffNumber"-->
+  <!--                           type="number"/>-->
+  <!--                  </td>-->
+  <!--                </tr>-->
+
+  <!--                <tr>-->
+  <!--                  <th scope="row"><b>Etat</b></th>-->
+  <!--                  <td>-->
+  <!--                    <select [(ngModel)]="society.stage" class="form-control"-->
+  <!--                            name="stage">-->
+  <!--                      <option *ngFor="let stage of stages" [ngValue]="stage.value">{{stage.label}}</option>-->
+  <!--                    </select>-->
+  <!--                  </td>-->
+  <!--                </tr>-->
+
+  <!--                <tr>-->
+  <!--                  <th scope="row"><b>Secteur d'activité</b></th>-->
+  <!--                  <td>-->
+  <!--                    <select [(ngModel)]="society.activityArea" class="form-control"-->
+  <!--                            name="activityArea">-->
+  <!--                      <option value="Other">Autres</option>-->
+  <!--                      <option value="Aerospace">Aéronautique</option>-->
+  <!--                      <option value="Aerospace">Aérospatial</option>-->
+  <!--                      <option value="Agri">Agroalimentaire</option>-->
+  <!--                      <option value="Insurance">Assurance</option>-->
+  <!--                      <option value="Automobile">Automobile</option>-->
+  <!--                      <option value="Bank">Banque</option>-->
+  <!--                      <option value="Buildings">Bâtiments</option>-->
+  <!--                      <option value="Biomedical">Biomédical</option>-->
+  <!--                      <option value="Chemistry">Chimie</option>-->
+  <!--                      <option value="Advice">Conseil</option>-->
+  <!--                      <option value="Defense">Défense</option>-->
+  <!--                      <option value="SoftwarePublishing">Edition de logiciels</option>-->
+  <!--                      <option value="Energy">Energie</option>-->
+  <!--                      <option value="Environment">Environnement</option>-->
+  <!--                      <option value="Rail">Ferroviaire</option>-->
+  <!--                      <option value="LargeDistribution">Grande distribution</option>-->
+  <!--                      <option value="Infrastructure">Infrastructure</option>-->
+  <!--                      <option value="Logistics">Logistique</option>-->
+  <!--                      <option value="Media">Média</option>-->
+  <!--                      <option value="MetalSteelIndustry">Métallurgie/sidérurgie</option>-->
+  <!--                      <option value="Naval">Naval</option>-->
+  <!--                      <option value="Nuclear">Nucléaire</option>-->
+  <!--                      <option value="OilAndGas">Oil &amp; Gaz</option>-->
+  <!--                      <option value="Petrochemicals">Pétrochimie</option>-->
+  <!--                      <option value="Pharmacy">Pharmacie</option>-->
+  <!--                      <option value="Health">Santé</option>-->
+  <!--                      <option value="PublicSector">Secteur public</option>-->
+  <!--                      <option value="Services">Services</option>-->
+  <!--                      <option value="Telecommunications">Télécommunications</option>-->
+  <!--                    </select>-->
+  <!--                  </td>-->
+  <!--                </tr>-->
+
+  <!--                <tr>-->
+  <!--                  <th scope="row"><b>Responsable Manager</b></th>-->
+  <!--                  <td>-->
+  <!--                    <select [(ngModel)]="society.managerReference"-->
+  <!--                            class="form-control" name="manager">-->
+  <!--                      <option *ngFor="let user of users" [ngValue]="user.reference">{{user.firstname}}-->
+  <!--                        {{user.lastname}}-->
+  <!--                      </option>-->
+  <!--                    </select>-->
+  <!--                  </td>-->
+  <!--                </tr>-->
+  <!--                </tbody>-->
+  <!--              </table>-->
+
+
+  <!--              &lt;!&ndash;            <div class="form-row">&ndash;&gt;-->
+  <!--              &lt;!&ndash;              <div class="form-group col-md-10">&ndash;&gt;-->
+  <!--              &lt;!&ndash;                <input [(ngModel)]="serviceTitle" class="form-control"&ndash;&gt;-->
+  <!--              &lt;!&ndash;                       name="qualifTitle" placeholder="Service ..."/>&ndash;&gt;-->
+  <!--              &lt;!&ndash;              </div>&ndash;&gt;-->
+  <!--              &lt;!&ndash;              <div class="col-md-2">&ndash;&gt;-->
+  <!--              &lt;!&ndash;                <span>&ndash;&gt;-->
+  <!--              &lt;!&ndash;                <button (click)="addService()" [disabled]="!serviceTitle"&ndash;&gt;-->
+  <!--              &lt;!&ndash;                        class="btn btn-primary fa fa-plus" type="button"></button>&ndash;&gt;-->
+  <!--              &lt;!&ndash;                </span>&ndash;&gt;-->
+  <!--              &lt;!&ndash;              </div>&ndash;&gt;-->
+  <!--              &lt;!&ndash;            </div>&ndash;&gt;-->
+
+
+  <!--              <div class="form-group">-->
+  <!--                <button [class.btn-warning]="editing" class="btn btn-primary"-->
+  <!--                        type="submit">Enregistrer-->
+  <!--                </button>-->
+  <!--                <button class="btn btn-secondary" routerLink="/societies"-->
+  <!--                        type="reset">Annuler-->
+  <!--                </button>-->
+  <!--              </div>-->
+  <!--            </form>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </mdb-card-body>-->
+  <!--    </mdb-card>-->
+  <!--  </div>-->
+</div>

@@ -1,0 +1,60 @@
+<mdb-card class="text-white">
+  <mdb-card-header><h4><img src="../../assets/user.png" style="width: 30px; height: 30px"> Liste des utilisateurs</h4>
+  </mdb-card-header>
+  <mdb-card-body>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <input #search (keyup)="onSearch(search.value)" aria-label="Recherche"
+               class="form-control" placeholder="Rechercher un utilisateur..." type="search">
+      </div>
+    </div>
+
+    <div class="fixed-bottom"></div>
+  </mdb-card-body>
+</mdb-card>
+<br>
+<!--<div class="p-2  text-white "-->
+<!--     style="background-color: #4267b2; width: auto; box-shadow: 2px 2px 2px grey; border-radius: 5px; text-align: center;">-->
+<!--  <h5>Liste des utilisateurs</h5>-->
+
+<!--</div><br><br>-->
+<div class="container-fluid">
+
+
+  <!--<div class="form-group bg-light border-light">-->
+
+  <!--<div class="col border bg-warning">-->
+  <!--<h5 class="text-dark dropdown-header">Liste des Utilisateurs</h5>-->
+  <!--</div>-->
+
+  <!--</div>-->
+  <div>
+    <mdb-card style="margin-left: -5px">
+      <mdb-card-body style="margin-left: -5px">
+        <ng2-smart-table (delete)="deleteUser($event)"
+                         (userRowSelect)="onSelectRow($event)"
+                         (edit)="showUser($event)"
+                         [settings]="settings"
+                         [source]="source">
+        </ng2-smart-table>
+      </mdb-card-body>
+    </mdb-card>
+    <div class="dropdown-divider"></div>
+  </div>
+  <div class="form-group">
+    <button color="primary"
+            mat-raised-button (click)="onCreate()">
+      <mat-icon>add</mat-icon>
+      Créer un utilisateur
+    </button>
+
+    <!--    <button color="primary"-->
+    <!--            mat-raised-button routerLink="/admin/users/create">-->
+    <!--      <mat-icon>add</mat-icon>-->
+    <!--      Créer un utilisateur-->
+    <!--    </button>-->
+  </div>
+</div>
+
+

@@ -1,0 +1,50 @@
+<div class="container">
+
+  <div class="form-group bg-light border-light">
+
+    <mdb-card class="text-white">
+      <mdb-card-header><h4><img src="../../assets/company.png" style="width: 30px; height: 30px">Contacts de la Société
+      </h4></mdb-card-header>
+      <mdb-card-body>
+
+        <div class="form-row">
+
+          <div class="form-group col-md-6">
+            <label>Etat</label>
+            <select (change)="onSelectChange('stage',$event.target.value)" class="form-control" name="stage">
+              <option *ngFor="let stage of stages" [value]="stage.value">{{stage.label}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>Mots clefs</label>
+            <input #search (keyup)="onSearch(search.value)" aria-label="Recherche"
+                   class="form-control" placeholder="recherche..." type="search">
+          </div>
+        </div>
+
+        <div class="fixed-bottom"></div>
+      </mdb-card-body>
+    </mdb-card>
+
+
+  </div>
+
+  <ng2-smart-table (delete)="deleteSocietyContact($event)"
+                   (userRowSelect)="onSelectRow($event)"
+                   (edit)="showSocietyContact($event)"
+                   [settings]="settings"
+                   [source]="source"></ng2-smart-table>
+  <div class="dropdown-divider"></div>
+
+  <div class="form-group">
+
+    <button color="primary" mat-raised-button routerLink="/societies/edit/{{societyReference}}/contacts/create">
+      <mat-icon>add</mat-icon>
+      Créer un contact
+    </button>
+
+  </div>
+</div>
+
+

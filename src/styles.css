@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+
+body {
+  padding-top: 80px;
+
+}
+
+.card-header:first-child {
+  background-color: #4267b2;
+  color: white;
+  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+
+tr.ng2-smart-titles {
+  background-color: #4267b2;
+  color: white;
+}
+
+a.ng2-smart-sort-link.sort {
+  color: white;
+}
+
+tr:hover {
+  cursor: pointer;
+}
+
+.starter-template {
+  padding: 3rem 1.5rem;
+  /*     text-align: center; */
+}
+
+tr.ng2-smart-filters {
+  display: none;
+}
+
+.dialog > mat-dialog-container {
+  padding: 2px;
+}
+
+.navbar {
+  background-color: #4267b2;
+}
+
+/*input.ng-dirty.ng-invalid {*/
+/*border: 2px solid #ff0000*/
+/*}*/
+
+/*input.ng-dirty.ng-valid {*/
+/*border: 2px solid #6bc502*/
+/*}*/
+
+/*.form-group.required .control-label:after {*/
+/*content: "*";*/
+/*color: red;*/
+/*}*/
+
+/*.form-group.required .col-form-label:after {*/
+/*content: "*";*/
+/*color: red;*/
+/*}*/

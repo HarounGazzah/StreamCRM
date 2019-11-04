@@ -1,0 +1,126 @@
+<!--Main Navigation-->
+<header *ngIf="isAdmin() || isClient()">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <a class="navbar-brand" routerLink="/dashboard" style="color: #ffffff"><i class="fa fa-home"></i><strong>&nbsp;Streamlink
+    </strong></a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
+            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li *ngIf="isLoggedIn()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/actions" routerLinkActive="active"><b>Actions</b></a>
+        </li>
+
+        <li *ngIf="isLoggedIn()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/developers" routerLinkActive="active"><b>Candidats</b></a>
+        </li>
+
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/resources" routerLinkActive="active">Resources </a>
+        </li>
+
+        <li *ngIf="isLoggedIn()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/societies" routerLinkActive="active"><b>CRM</b></a>
+        </li>
+
+        <li *ngIf="isLoggedIn()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/needs" routerLinkActive="active"><b>Besoins</b></a>
+        </li>
+
+        <li *ngIf="isLoggedIn()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/positionings" routerLinkActive="active"><b>Positionnements</b></a>
+        </li>
+
+        <li *ngIf="isLoggedIn()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/projects" routerLinkActive="active"><i class="f542"></i><b>Projets</b></a>
+        </li>
+        <li *ngIf="isAdmin()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/bills" routerLinkActive="active"><i class="f542"></i><b>Factures</b></a>
+        </li>
+        <li *ngIf="isAdmin()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/stats" routerLinkActive="active"><i class="f542"></i><b>Statistiques</b></a>
+        </li>
+        <li *ngIf="isAdmin()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/admin" routerLinkActive="active" style="color:azure"><b>Gestion
+            d'utilisateurs</b></a>
+        </li>
+        <li *ngIf="!isResource()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/validation" routerLinkActive="active">Gestion d'absence </a>
+        </li>
+      </ul>
+      <div class="md-form my-0">
+        <ul class="navbar-nav mr-auto">
+          <li *ngIf="isLoggedIn() && isAdmin() && user$ | async as user" class="nav-item" routerLinkActive="active">
+            <a class="dropdown-item  text-warning" routerLink="/profil" routerLinkActive="active"><i
+              class="fa fa-user"></i> &nbsp;{{user.firstname }} {{user.lastname}}</a>
+          </li>
+          <li *ngIf="isLoggedIn() && !isAdmin() && user$ | async as user" class="nav-item" routerLinkActive="active">
+            <a class="dropdown-item  text-warning">{{user.firstname }} {{user.lastname}}</a>
+          </li>
+          <li *ngIf="isLoggedIn()" class="nav-item">
+            <a (click)="logout()" class="dropdown-item text-warning"><i class="fa fa-power-off"></i></a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+
+<header *ngIf="isResource()">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <a class="navbar-brand" routerLink="/dashboard" style="color: #ffffff"><i class="fa fa-home"></i><strong>STREAMLINK
+    </strong></a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Projets</a>
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/timesheet" routerLinkActive="active">Timesheet</a>
+        </li>
+
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/absence" routerLinkActive="active">Absence </a>
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/profil" routerLinkActive="active">Profile</a>
+        </li>
+
+
+      </ul>
+      <div class="md-form my-0">
+        <ul class="navbar-nav mr-auto">
+
+          <li *ngIf="isLoggedIn() && isAdmin() && user$ | async as user" class="nav-item" routerLinkActive="active">
+            <a class="dropdown-item  text-warning" routerLink="/profil" routerLinkActive="active"><i
+              class="fa fa-user"></i> &nbsp;{{user.firstname }} {{user.lastname}}</a>
+          </li>
+          <li *ngIf="isLoggedIn() && !isAdmin() && user$ | async as user" class="nav-item" routerLinkActive="active">
+            <a class="dropdown-item  text-warning">{{user.firstname }} {{user.lastname}}</a>
+          </li>
+          <li *ngIf="isLoggedIn()" class="nav-item">
+            <a class="dropdown-item  text-warning">{{user.firstname }} {{user.lastname}}</a>
+            <a (click)="logout()" class="dropdown-item text-warning"><i class="fa fa-power-off"></i></a>
+          </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>

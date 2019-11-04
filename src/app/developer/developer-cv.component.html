@@ -1,0 +1,52 @@
+<form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+  <table *ngIf="cvs?.length > 0"
+         class="table table-striped table-sm">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">CV</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cv of cvs; let i=index">
+      <td>{{i + 1}}</td>
+      <td>
+        <a target="_blank" [href]="cv.url" class="card-link" type="text/html">{{cv.label}}</a>
+
+      </td>
+      <td>
+        <button (click)="deleteCV(i)" class="btn btn-sm btn-danger fa fa-trash"
+                type="button"></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="form-group required">
+    <label class="col-form-label" for="file">Choose File</label>
+    <input #file_input="ngModel" (change)="handleFileInput($event.target.files)" [(ngModel)]="f"
+           [fileSizeErrorMsg]="'Le fichier ne peut pas dépasser les 7M !'"
+           [ng2FileSize]="{ max: 1024 * 1024 * 8 * 7}" accept=".pdf,.doc,.docx" class="form-control-file"
+           id="file"
+           name="file" required
+           type="file">
+
+    <app-field-error-display
+      [displayError]="form.submitted && file_input.invalid"
+      [model]="file_input"
+      fieldName="CV">
+    </app-field-error-display>
+  </div>
+
+  <div class="form-group">
+
+    <button
+      style="margin: 10px" type="submit"
+      color="primary"
+      mat-raised-button
+      type="submit">Enregistrer
+    </button>
+
+  </div>
+</form>

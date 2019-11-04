@@ -1,0 +1,39 @@
+
+<body>
+<div class="container">
+  <mdb-card>
+    <mdb-card-header >List d'absences </mdb-card-header>
+
+    <mdb-card-body>
+
+
+      <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+
+          <th  scope="col">Date</th>
+          <th  scope="col">Type d'absence</th>
+          <th  scope="col">Description</th>
+          <th  scope="col">Durée</th>
+          <th  scope="col">Etat</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let el of absences">
+          <td>{{el.dateAbsence | date:'yyyy-MM-dd' }}</td>
+          <td>{{el.type}}</td>
+          <td>{{el.description}}</td>
+          <td>{{el.duration}}</td>
+          <td>{{el.state}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </mdb-card-body>
+
+  </mdb-card>
+</div>
+
+</body>

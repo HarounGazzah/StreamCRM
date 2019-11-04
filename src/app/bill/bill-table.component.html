@@ -1,0 +1,41 @@
+<div class="container-fluid" style="padding-right: 5%; padding-left: 5%">
+
+  <mdb-card class="text-white">
+    <mdb-card-header><h4><img src="../../assets/company.png" style="width: 30px; height: 30px">Liste des Factures</h4>
+    </mdb-card-header>
+    <mdb-card-body>
+
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label style="color: #4267b2;">Etape</label>
+          <select (change)="onSelectChange('billStage',$event.target.value)" class="form-control" name="stage">
+            <option *ngFor="let stage of billStage" [value]="stage.value">{{stage.label}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label style="color: #4267b2;">Client</label>
+          <input #search (keyup)="onSearch(search.value)" aria-label="Recherche"
+                 class="form-control" placeholder="recherche..." type="search">
+        </div>
+      </div>
+
+
+      <div class="fixed-bottom"></div>
+    </mdb-card-body>
+  </mdb-card>
+  <br>
+  <mdb-card style="margin-left: -5px">
+    <mdb-card-body style="margin-left: -5px">
+      <ng2-smart-table
+        [settings]="settings"
+        [source]="source"
+        (edit)="showBill($event)"
+        (delete)="deleteBill($event)"
+        (userRowSelect)="onSelectRow($event)">
+      </ng2-smart-table>
+    </mdb-card-body>
+  </mdb-card>
+</div>
+

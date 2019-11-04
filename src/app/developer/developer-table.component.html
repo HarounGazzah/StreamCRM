@@ -1,0 +1,72 @@
+<div class="container-fluid" style="padding-right: 5%; padding-left: 5%">
+
+
+  <mdb-card class="text-white">
+    <mdb-card-header><h4><img src="../../assets/company.png" style="width: 30px; height: 30px">Liste des Candidats</h4>
+    </mdb-card-header>
+    <mdb-card-body>
+
+      <div class="form-row">
+
+        <div class="form-group col-md-4">
+          <label style="color: #4267b2;">Etape</label>
+          <select (change)="onSelectChange('stage',$event.target.value)" class="form-control" name="stage">
+            <option *ngFor="let stage of stages" [value]="stage.value">{{stage.label}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label style="color: #4267b2;">Formation</label>
+          <select (change)="onSelectChange('formation',$event.target.value)" class="form-control" name="formation">
+            <option *ngFor="let formation of formations" [value]="formation.value">{{formation.label}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label style="color: #4267b2;">Expérience</label>
+          <select (change)="onSelectChange('experience',$event.target.value)" class="form-control" name="experience">
+            <option *ngFor="let experience of experiences" [value]="experience.value">{{experience.label}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group col">
+          <input #search (keyup)="onSearch(search.value)" aria-label="Recherche"
+                 class="form-control" placeholder="recherche..." type="search">
+        </div>
+      </div>
+
+      <div class="fixed-bottom"></div>
+    </mdb-card-body>
+  </mdb-card>
+  <br>
+  <mdb-card style="margin-left: -5px">
+    <mdb-card-body style="margin-left: -5px">
+      <ng2-smart-table
+        (userRowSelect)="onSelectRow($event)"
+        (delete)="deleteDeveloper($event)"
+        (edit)="showDeveloper($event)"
+        [settings]="settings"
+        [source]="source">
+      </ng2-smart-table>
+    </mdb-card-body>
+  </mdb-card>
+  <div class="dropdown-divider"></div>
+
+  <div class="form-group">
+    <button style="margin: 5px" color="primary" mat-raised-button routerLink="/developers/create">
+      <mat-icon>add</mat-icon>
+      Ajouter un candidat
+    </button>
+
+
+    <button color="primary" mat-raised-button routerLink="/developers/create/from-cv">
+      <mat-icon>chrome_reader_mode</mat-icon>
+      Scan CV
+    </button>
+  </div>
+</div>
+
+

@@ -1,0 +1,28 @@
+<div class="container">
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" role="tab" routerLink="demande" routerLinkActive="active">
+        Demande d'absence
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill"  role="tab" routerLink="list" routerLinkActive="active">
+        Historique d'absence
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill"  role="tab" routerLink="count" routerLinkActive="active">
+        Décompte d'absence
+      </a>
+    </li>
+    <!--<li class="nav-item">
+      <a class="nav-link" data-toggle="pill" role="tab" routerLink="skills" routerLinkActive="active">
+        Décompte d'absence
+      </a>
+    </li>-->
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <router-outlet></router-outlet>
+  </div>
+</div>

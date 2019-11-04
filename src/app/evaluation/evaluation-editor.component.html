@@ -1,0 +1,132 @@
+<div class="container" role="tabpanel">
+  <mdb-card>
+    <div class="row">
+      <div class="col">
+        <mdb-card>
+          <mdb-card-header>Evaluations</mdb-card-header>
+        </mdb-card>
+      </div>
+    </div>
+    <mdb-card-body>
+      <div class="row">
+        <div class="col border">
+          <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+
+            <div *ngIf="editing" class="form-group">
+              <label class="col-form-label">Date de Création: </label>
+              <input class="form-control-plaintext" name="createdDate"
+                     readonly
+                     style="width: 70%" type="text"
+                     value="{{evaluation.createdDate | date:'long'}}"/>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6 required">
+                <label class="col-form-label">Technique</label>
+                <select #technical_input="ngModel" [(ngModel)]="evaluation.technical"
+                        class="form-control" name="technical" required>
+                  <option value="NOT_DEFINED">Non défini</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                </select>
+
+                <app-field-error-display
+                  [displayError]="form.submitted && technical_input.invalid"
+                  [model]="technical_input"
+                  fieldName="Note technique">
+                </app-field-error-display>
+              </div>
+
+              <div class="form-group col-md-6 required">
+                <label class="col-form-label">Relationnel</label>
+                <select #relational_input="ngModel" [(ngModel)]="evaluation.relational"
+                        class="form-control" name="relational"
+                        required>
+                  <option value="NOT_DEFINED">Non défini</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                </select>
+
+                <app-field-error-display
+                  [displayError]="form.submitted && relational_input.invalid"
+                  [model]="relational_input"
+                  fieldName="Note Relationnelle">
+                </app-field-error-display>
+              </div>
+
+
+            </div>
+
+            <div class="form-group required">
+              <label class="col-form-label">Note</label>
+              <textarea #note_input="ngModel" [(ngModel)]="evaluation.note" class="form-control" name="note"
+                        required rows="5">
+			    </textarea>
+
+              <app-field-error-display
+                [displayError]="form.submitted && note_input.invalid"
+                [model]="note_input"
+                fieldName="Note Relationnelle">
+              </app-field-error-display>
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-warning" type="submit">Enregistrer</button>
+              <button *ngIf="isDeveloper()" class="btn btn-secondary" routerLink="/developers"
+                      type="reset">Annuler
+              </button>
+              <button *ngIf="!isDeveloper()" class="btn btn-secondary" routerLink="/resources"
+                      type="reset">Annuler
+              </button>
+
+              <button (click)="newEvaluation(form)" *ngIf="editing" class="btn btn-primary"
+                      type="button">Nouveau
+              </button>
+            </div>
+
+            <table *ngIf="evaluations?.length > 0"
+                   class="table table-striped table-sm">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Technique</th>
+                <th scope="col">Relationnel</th>
+                <th scope="col">Note</th>
+                <th scope="col">Responsable</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let eva of evaluations; let i=index">
+                <td>{{i + 1}}</td>
+                <td>
+                  <app-custom-enum-render [value]="eva.technical"></app-custom-enum-render>
+                </td>
+                <td>
+                  <app-custom-enum-render [value]="eva.relational"></app-custom-enum-render>
+                </td>
+                <td>{{eva.note}}</td>
+                <td>{{eva.responsibleFullName}}</td>
+                <td>
+                  <button (click)="showEvaluation(i,form)" class="btn btn-sm btn-info fa fa-edit"
+                          type="button">
+                  </button>
+
+                  <button (click)="deleteEvaluation(i)" class="btn btn-sm btn-danger fa fa-trash"
+                          type="button">
+                  </button>
+
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </mdb-card-body>
+  </mdb-card>
+</div>

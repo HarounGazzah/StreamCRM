@@ -1,0 +1,348 @@
+
+  <div class="row">
+    <div class="col">
+      <mdb-card>
+        <div class="row">
+          <div class="col">
+            <mdb-card>
+              <mdb-card-header>Informations
+<span class="float-right">Créer le {{need.createdDate | date}} à {{need.createdDate | date:"MM:ss"}}</span>
+
+              </mdb-card-header>
+            </mdb-card>
+          </div>
+        </div>
+        <mdb-card-body>
+
+          <div class="row">
+            <div class="col">
+
+              <table class="table table-striped">
+                <thead></thead>
+                <tbody>
+                <tr>
+                  <th scope="row"><b>Titre</b></th>
+                  <td>
+                      <input #title_input="ngModel"
+                             [(ngModel)]="need.title"
+                             matInput
+                             name="title"
+                             required/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Societé</b></th>
+                  <td>
+                    <ng-select (change)="onSocietyChange($event)"
+                               [(ngModel)]="need.societyReference"
+                               [items]="societies$ | async"
+                               [loading]="societiesLoading"
+                               [typeahead]="societiesInput$"
+                               bindLabel="label"
+                               bindValue="reference"
+                               name="society"
+                               notFoundText="Aucun élément trouvé"
+                               typeToSearchText="tapez plus de 3 caractères pour trouver la société">
+                    </ng-select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Contact</b></th>
+                  <td>
+                    <ng-select [(ngModel)]="need.societyContactReference"
+                               [items]="contacts$ | async"
+                               bindValue="reference"
+                               name="contact"
+                               notFoundText="Aucun élément trouvé">
+                      <ng-template let-item="item" ng-label-tmp>
+                        {{item.firstname}} {{item.lastname}}
+                      </ng-template>
+                      <ng-template let-item="item" ng-option-tmp>
+                        {{item.firstname}} {{item.lastname}}
+                      </ng-template>
+                    </ng-select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Etape</b></th>
+                  <td>
+                    <select [(ngModel)]="need.stage"
+                                name="stage"
+                                class="form-control"
+                                placeholder="Etape">
+                      <option *ngFor="let stage of stages"
+                                  [ngValue]="stage.value">{{stage.label}}
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Type</b></th>
+                  <td>
+                      <select [(ngModel)]="need.type"
+                                  class="form-control"
+                                  name="type">
+                        <option *ngFor="let type of types"
+                                    [ngValue]="type.value">{{type.label}}
+                        </option>
+                      </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>Responsable manager</b></th>
+                  <td>
+                      <select [(ngModel)]="need.managerReference"
+                                  class="form-control"
+                                  name="manager">
+                        <option *ngFor="let user of users" [ngValue]="user.reference">{{user.firstname}}
+                          {{user.lastname}}
+                        </option>
+                      </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Responsable RH</b></th>
+                  <td>
+                      <select [(ngModel)]="need.rhReference"
+                                  class="form-control"
+                                  name="rh">
+                        <option *ngFor="let user of users" [ngValue]="user.reference">{{user.firstname}}
+                          {{user.lastname}}
+                        </option>
+                      </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row"><b>Description & critères requis</b></th>
+                  <td></td>
+                </tr>
+
+
+                </tbody>
+              </table>
+              <mat-form-field class="example-container">
+                      <textarea [(ngModel)]="need.note"
+                                matInput
+                                name="note"
+                                placeholder="Description et critères requis"
+                                rows="5"></textarea>
+              </mat-form-field>
+              <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+
+                <button
+                  color="primary"
+                  mat-raised-button
+                  style="margin: 10px"
+                  type="submit">
+                  <mat-icon>save_outline</mat-icon>
+                  Enregistrer
+
+                </button>
+                <button color="warn"
+                        mat-raised-button
+                        routerLink="/needs"
+                        type="reset">
+                  <mat-icon>close</mat-icon>
+                  Retour
+                </button>
+              </form>
+            </div>
+          </div>
+        </mdb-card-body>
+
+      </mdb-card>
+    </div>
+
+    <div class="col">
+
+            <app-need-info></app-need-info>
+
+    </div>
+
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <app-action></app-action>
+          <!--            <mdb-card>-->
+          <!--              <mdb-card-header>Informations</mdb-card-header>-->
+          <!--            </mdb-card>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  <div class="row">-->
+  <!--    <div class="col">-->
+  <!--      <div class="row">-->
+
+  <!--        <mdb-card>-->
+
+
+  <!--          <mdb-card-header>Information du besoin <span class="float-right">-->
+  <!--           Créer le {{need.createdDate | date}} à {{need.createdDate | date:"MM:ss"}}-->
+  <!--          </span></mdb-card-header>-->
+  <!--          <mdb-card-body [ngStyle]="{'height':editing ? '695px' : ''}">-->
+  <!--            <div class="row">-->
+  <!--              <div class="col-md-12">-->
+  <!--                <div class="form-group">-->
+  <!--                  <mat-form-field class="example-container">-->
+  <!--                    <input #title_input="ngModel"-->
+  <!--                           [(ngModel)]="need.title"-->
+  <!--                           matInput-->
+  <!--                           name="title"-->
+  <!--                           placeholder="Titre" required/>-->
+  <!--                  </mat-form-field>-->
+  <!--                  <app-field-error-display-->
+  <!--                    [displayError]="form.submitted && title_input.invalid"-->
+  <!--                    [model]="title_input"-->
+  <!--                    fieldName="Titre">-->
+  <!--                  </app-field-error-display>-->
+  <!--                </div>-->
+  <!--              </div>-->
+  <!--            </div>-->
+  <!--            <div class="row">-->
+
+  <!--              <div class="col-md-6">-->
+
+  <!--                <div class="form-group">-->
+  <!--                  <ng-select (change)="onSocietyChange($event)"-->
+  <!--                             [(ngModel)]="need.societyReference"-->
+  <!--                             [items]="societies$ | async"-->
+  <!--                             [loading]="societiesLoading"-->
+  <!--                             [typeahead]="societiesInput$"-->
+  <!--                             bindLabel="label"-->
+  <!--                             bindValue="reference"-->
+  <!--                             name="society"-->
+  <!--                             notFoundText="Aucun élément trouvé"-->
+  <!--                             placeholder="Societé"-->
+  <!--                             typeToSearchText="tapez plus de 3 caractères pour trouver la société">-->
+  <!--                  </ng-select>-->
+  <!--                </div>-->
+
+
+  <!--                <div class="form-group">-->
+  <!--                  <mat-form-field class="example-container">-->
+  <!--                    <mat-select [(ngModel)]="need.stage"-->
+  <!--                                name="stage"-->
+  <!--                                placeholder="Etape">-->
+  <!--                      <mat-option *ngFor="let stage of stages"-->
+  <!--                                  [value]="stage.value">{{stage.label}}-->
+  <!--                      </mat-option>-->
+  <!--                    </mat-select>-->
+  <!--                  </mat-form-field>-->
+  <!--                </div>-->
+
+  <!--                <div class="form-group">-->
+  <!--                  <mat-form-field class="example-container">-->
+  <!--                    <mat-select [(ngModel)]="need.managerReference"-->
+  <!--                                name="manager"-->
+  <!--                                placeholder="Responsable manager">-->
+  <!--                      <mat-option *ngFor="let user of users" [value]="user.reference">{{user.firstname}}-->
+  <!--                        {{user.lastname}}-->
+  <!--                      </mat-option>-->
+  <!--                    </mat-select>-->
+  <!--                  </mat-form-field>-->
+  <!--                </div>-->
+
+  <!--              </div>-->
+
+  <!--              <div class="col-md-6">-->
+  <!--                <div class="form-group">-->
+  <!--                  <ng-select [(ngModel)]="need.societyContactReference"-->
+  <!--                             [items]="contacts$ | async"-->
+  <!--                             bindValue="reference"-->
+  <!--                             name="contact"-->
+  <!--                             notFoundText="Aucun élément trouvé"-->
+  <!--                             placeholder="Contact">-->
+  <!--                    <ng-template let-item="item" ng-label-tmp>-->
+  <!--                      {{item.firstname}} {{item.lastname}}-->
+  <!--                    </ng-template>-->
+  <!--                    <ng-template let-item="item" ng-option-tmp>-->
+  <!--                      {{item.firstname}} {{item.lastname}}-->
+  <!--                    </ng-template>-->
+  <!--                  </ng-select>-->
+  <!--                </div>-->
+
+  <!--                <div class="form-group">-->
+  <!--                  <mat-form-field class="example-container">-->
+
+  <!--                    <mat-select [(ngModel)]="need.type"-->
+  <!--                                name="type"-->
+  <!--                                placeholder="Type">-->
+  <!--                      <mat-option *ngFor="let type of types"-->
+  <!--                                  [value]="type.value">{{type.label}}-->
+  <!--                      </mat-option>-->
+  <!--                    </mat-select>-->
+  <!--                  </mat-form-field>-->
+  <!--                </div>-->
+
+
+  <!--                <div class="form-group">-->
+  <!--                  <mat-form-field class="example-container">-->
+  <!--                    <mat-select [(ngModel)]="need.rhReference"-->
+  <!--                                name="rh" placeholder="Responsable RH">-->
+  <!--                      <mat-option *ngFor="let user of users" [value]="user.reference">{{user.firstname}}-->
+  <!--                        {{user.lastname}}-->
+  <!--                      </mat-option>-->
+  <!--                    </mat-select>-->
+  <!--                  </mat-form-field>-->
+  <!--                </div>-->
+
+  <!--              </div>-->
+
+  <!--            </div>-->
+  <!--            <div class="row">-->
+  <!--              <div class="col-md-12">-->
+  <!--                <div class="form-group">-->
+  <!--                  <mat-form-field class="example-container">-->
+  <!--                  <textarea [(ngModel)]="need.note"-->
+  <!--                            matInput-->
+  <!--                            name="note"-->
+  <!--                            placeholder="Description et critères requis"-->
+  <!--                            rows="7"></textarea>-->
+  <!--                  </mat-form-field>-->
+  <!--                </div>-->
+  <!--              </div>-->
+  <!--            </div>-->
+
+
+  <!--            &lt;!&ndash;<div class="form-group" [ngStyle]="{'margin-top':editing ? '20%':'15%'}">&ndash;&gt;-->
+
+
+  <!--            &lt;!&ndash;</div>&ndash;&gt;-->
+  <!--          </mdb-card-body>-->
+  <!--        </mdb-card>-->
+
+
+  <!--        <div *ngIf="editing" class="col border" style="margin-left: 1px">-->
+  <!--          <app-need-info></app-need-info>-->
+  <!--        </div>-->
+  <!--        <form #form="ngForm" (ngSubmit)="save(form)" novalidate>-->
+
+  <!--          <button-->
+  <!--            color="primary"-->
+  <!--            mat-raised-button-->
+  <!--            style="margin: 10px"-->
+  <!--            type="submit">-->
+  <!--            <mat-icon>save_outline</mat-icon>-->
+  <!--            Enregistrer-->
+
+  <!--          </button>-->
+  <!--          <button color="warn"-->
+  <!--                  mat-raised-button-->
+  <!--                  routerLink="/needs"-->
+  <!--                  type="reset">-->
+  <!--            <mat-icon>close</mat-icon>-->
+  <!--            Retour-->
+  <!--          </button>-->
+  <!--        </form>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->

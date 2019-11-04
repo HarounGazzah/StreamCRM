@@ -1,0 +1,105 @@
+<div class="container">
+  <mdb-card>
+    <div class="row">
+      <div class="col">
+        <mdb-card>
+          <mdb-card-header>Profil Technique</mdb-card-header>
+        </mdb-card>
+      </div>
+    </div>
+    <mdb-card-body>
+      <div class="row">
+        <div class="col-8">
+          <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+
+            <div class="form-group">
+              <label>Titre</label> <input [(ngModel)]="skills.title" class="form-control"
+                                          name="title"/>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Formation</label> <select [(ngModel)]="skills.formation"
+                                                 class="form-control" name="formation">
+                <option *ngFor="let ff of formations" [ngValue]="ff.value">{{ff.label}}</option>
+              </select>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label>Expérience</label> <select [(ngModel)]="skills.experience"
+                                                  class="form-control" name="experience">
+                <option *ngFor="let ex of experiences" [ngValue]="ex.value">{{ex.label}}</option>
+              </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <label>Compétences</label>
+
+              <textarea [(ngModel)]="skills.languages" class="form-control" name="languages"
+                        placeholder="Nuages de mots clés ..."
+                        rows="5"></textarea>
+
+              <!--<ng-select [multiple]="true" name="languages" #languages="ngModel"
+                  bindLabel="name" [(ngModel)]="skills.languages"
+                  [items]="languages$ | async" id="languages"
+                  placeholder="Selectionner des languages de Programmation ..."></ng-select>-->
+
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-10">
+                <input [(ngModel)]="qualifTitle" class="form-control"
+                       name="qualifTitle" placeholder="Nom du Diplôme ..."/>
+              </div>
+              <div class="col-md-2">
+						<span>
+							<button (click)="addQualifications()" [disabled]="!qualifTitle"
+                      class="btn btn-primary fa fa-plus" type="button">
+                            </button>
+						</span>
+              </div>
+            </div>
+
+            <table class="table table-striped table-sm">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th class="col-md-6" scope="col">Diplôme</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let skill of skills.qualifications; let i=index">
+                <td>{{i + 1}}</td>
+                <td class="col-md-6">{{skill}}</td>
+                <td>
+                  <button (click)="removeQualification(i)"
+                          class="btn btn-sm btn-danger">Delete
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div class="form-group">
+
+              <button type="submit" color="primary" mat-raised-button style="margin: 5px">Enregistrer
+              </button>
+
+
+              <button [routerLink]="urlToReturn" type="reset" color="warn" mat-raised-button style="margin: 5px">Annuler
+              </button>
+            </div>
+          </form>
+        </div>
+        <!--</div>-->
+        <!--<div class="row">-->
+        <div class="col-4 border">
+          <app-developer-cv></app-developer-cv>
+        </div>
+      </div>
+    </mdb-card-body>
+  </mdb-card>
+</div>

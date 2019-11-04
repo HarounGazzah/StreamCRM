@@ -1,0 +1,16 @@
+<div class="container">
+
+  <div *ngIf="displayError">
+    <span class="form-control-feedback fix-error-icon"></span>
+    <span class="sr-only">(error)</span>
+    <div class="error-msg">
+      <ul class="list-unstyled">
+        <li *ngFor="let error of getValidationMessages()">
+          {{error}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="" class="alert alert-danger" role="alert" *ngIf="errorMessage != null">{{errorMessage}}</div>
+</div>

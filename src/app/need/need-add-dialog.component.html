@@ -1,0 +1,169 @@
+<div class="container" role="tabpanel">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+
+        <mdb-card style="width: 100%;">
+
+          <mdb-card-header>Création du besoin </mdb-card-header>
+          <mdb-card-body>
+            <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-container">
+                    <input #title_input="ngModel"
+                           [(ngModel)]="need.title"
+                           matInput
+                           name="title"
+                           placeholder="Titre" required/>
+                  </mat-form-field>
+                  <app-field-error-display>
+                    [displayError]="form.submitted && title_input.invalid"
+                    [model]="title_input"
+                    fieldName="Titre">
+                  </app-field-error-display>
+                </div>
+              </div>
+              </div>
+            <div class="row">
+
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <ng-select (change)="onSocietyChange($event)"
+                             [(ngModel)]="need.societyReference"
+                             [items]="societies | async"
+                             [loading]="societiesLoading"
+                             [typeahead]="societiesInput$"
+                             bindLabel="label"
+                             bindValue="reference"
+                             name="society"
+                             notFoundText="Aucun élément trouvé"
+                             placeholder="Societé *"
+                             required
+                             typeToSearchText="tapez plus de 3 caractères pour trouver la société">
+                  </ng-select>
+                </div>
+
+
+                <div class="form-group">
+                  <mat-form-field class="example-container">
+                    <mat-select [(ngModel)]="need.stage"
+                                name="stage"
+                                placeholder="Etape">
+                      <mat-option *ngFor="let stage of stages"
+                                  [value]="stage.value">{{stage.label}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-form-field class="example-container">
+                    <mat-select [(ngModel)]="need.managerReference"
+                                name="manager"
+                                placeholder="Responsable manager">
+                      <mat-option *ngFor="let user of users" [value]="user.reference">{{user.firstname}}
+                        {{user.lastname}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <ng-select [(ngModel)]="need.societyContactReference"
+                             [items]="contacts$ | async"
+                             bindValue="reference"
+                             name="contact"
+                             required
+                             notFoundText="Aucun élément trouvé"
+                             placeholder="Contact *">
+                    <ng-template let-item="item" ng-label-tmp>
+                      {{item.firstname}} {{item.lastname}}
+                    </ng-template>
+                    <ng-template let-item="item" ng-option-tmp>
+                      {{item.firstname}} {{item.lastname}}
+                    </ng-template>
+                  </ng-select>
+                </div>
+
+                <div class="form-group">
+                  <mat-form-field class="example-container">
+
+                    <mat-select [(ngModel)]="need.type"
+                                name="type"
+                                placeholder="Type">
+                      <mat-option *ngFor="let type of types"
+                                  [value]="type.value">{{type.label}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="form-group">
+                  <mat-form-field class="example-container">
+                    <mat-select [(ngModel)]="need.rhReference"
+                                name="rh" placeholder="Responsable RH">
+                      <mat-option *ngFor="let user of users" [value]="user.reference">{{user.firstname}}
+                        {{user.lastname}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-container">
+                  <textarea [(ngModel)]="need.note"
+                            matInput
+                            name="note"
+                            placeholder="Description et critères requis"
+                            rows="7"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+            <!--<div class="form-group" [ngStyle]="{'margin-top':editing ? '20%':'15%'}">-->
+
+
+            <!--</div>-->
+
+              <button
+                [disabled]="form.form.invalid"
+                color="primary"
+                mat-raised-button
+                style="margin: 10px"
+                type="submit">
+                <mat-icon>save_outline</mat-icon>
+                Enregistrer
+
+              </button>
+              <button color="warn"
+                      mat-raised-button
+                      (click)="closeDialog()"
+                      type="reset">
+                <mat-icon>close</mat-icon>
+                Annuler
+              </button>
+            </form>
+          </mdb-card-body>
+        </mdb-card>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

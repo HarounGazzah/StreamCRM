@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <!--Made with love by Mutiullah Samim -->
+
+  <!--Bootsrap 4 CDN-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <!--Fontawesome CDN-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+</head>
+<app-field-error-display [errorMessage]="errorMessage">
+</app-field-error-display>
+<body>
+
+<div class="box">
+  <h2>Authentification</h2>
+  <form novalidate #form="ngForm" (ngSubmit)="authenticate(form)">
+    <div class="inputBox">
+      <input type="email" name="email" required value=""
+             [(ngModel)]="username" required email
+             #username_input="ngModel"
+             id="username"
+             name="username">
+      <app-field-error-display
+        [model]="username_input"
+        fieldName="Email"
+        [displayError]="form.submitted && username_input.invalid">
+      </app-field-error-display>
+      <label>Email</label>
+    </div>
+    <div class="inputBox">
+      <input type="password" name="password" required value=""
+             [(ngModel)]="password" required
+             #password_input="ngModel"
+             id="password"
+      >
+      <app-field-error-display
+        [model]="password_input"
+        fieldName="Mot de Passe"
+        [displayError]="form.submitted && password_input.invalid">
+      </app-field-error-display>
+      <label>Mot de passe</label>
+    </div>
+    <input type="submit" name="sign-in" value="Se connecter">
+  </form>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>
+
+

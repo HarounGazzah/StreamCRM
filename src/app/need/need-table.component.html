@@ -1,0 +1,104 @@
+<div class="container-fluid" style="padding-right: 5%; padding-left: 5%">
+
+  <mdb-card class="text-white">
+    <mdb-card-header><h4><img src="../../assets/project-management.png" style="width: 30px; height: 30px"> Liste des
+      besoins </h4></mdb-card-header>
+    <mdb-card-body>
+
+
+      <div class="form-row">
+
+        <div class="form-group col-md-4">
+          <label style="color: #4267b2;">Etape</label>
+          <select (change)="onSelectChange('stage',$event.target.value)" class="form-control" name="stage">
+            <option *ngFor="let stage of stages" [value]="stage.value">{{stage.label}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label style="color: #4267b2;">Type</label>
+          <select (change)="onSelectChange('type',$event.target.value)" class="form-control" name="formation">
+            <option *ngFor="let type of types" [value]="type.value">{{type.label}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label style="color: #4267b2;">Secteur d'activité </label>
+          <select (change)="onSelectChange('activityArea',$event.target.value)" class="form-control"
+                  name="activityArea">
+            <option value="">Tous</option>
+            <option value="Other">Autres</option>
+            <option value="Aerospace">Aéronautique</option>
+            <option value="Aerospace">Aérospatial</option>
+            <option value="Agri">Agroalimentaire</option>
+            <option value="Insurance">Assurance</option>
+            <option value="Automobile">Automobile</option>
+            <option value="Bank">Banque</option>
+            <option value="Buildings">Bâtiments</option>
+            <option value="Biomedical">Biomédical</option>
+            <option value="Chemistry">Chimie</option>
+            <option value="Advice">Conseil</option>
+            <option value="Defense">Défense</option>
+            <option value="SoftwarePublishing">Edition de logiciels</option>
+            <option value="Energy">Energie</option>
+            <option value="Environment">Environnement</option>
+            <option value="Rail">Ferroviaire</option>
+            <option value="LargeDistribution">Grande distribution</option>
+            <option value="Infrastructure">Infrastructure</option>
+            <option value="Logistics">Logistique</option>
+            <option value="Media">Média</option>
+            <option value="MetalSteelIndustry">Métallurgie/sidérurgie</option>
+            <option value="Naval">Naval</option>
+            <option value="Nuclear">Nucléaire</option>
+            <option value="OilAndGas">Oil &amp; Gaz</option>
+            <option value="Petrochemicals">Pétrochimie</option>
+            <option value="Pharmacy">Pharmacie</option>
+            <option value="Health">Santé</option>
+            <option value="PublicSector">Secteur public</option>
+            <option value="Services">Services</option>
+            <option value="Telecommunications">Télécommunications</option>
+          </select>
+        </div>
+
+
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <input #search (keyup)="onSearch(search.value)" aria-label="Recherche"
+                 class="form-control" placeholder="Recherche..." type="search">
+        </div>
+      </div>
+
+      <div class="fixed-bottom"></div>
+    </mdb-card-body>
+  </mdb-card>
+
+  <br>
+  <mdb-card style="margin-left: -5px">
+    <mdb-card-body style="margin-left: -5px">
+      <ng2-smart-table (delete)="deleteNeed($event)"
+                       (userRowSelect)="onSelectRow($event)"
+                       (edit)="showNeed($event)"
+                       [settings]="settings"
+                       [source]="source">
+      </ng2-smart-table>
+    </mdb-card-body>
+  </mdb-card>
+  <div class="dropdown-divider"></div>
+
+  <div class="form-group">
+
+    <button color="primary" mat-raised-button (click)="onCreate()">
+      <mat-icon>add</mat-icon>
+      Créer un besoin
+    </button>
+
+
+    <!--    <button color="primary" mat-raised-button routerLink="/needs/create">-->
+    <!--      <mat-icon>add</mat-icon>-->
+    <!--      Créer un besoin-->
+    <!--    </button>-->
+
+  </div>
+</div>

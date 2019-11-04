@@ -1,0 +1,160 @@
+<div class="row">
+  <div class="col">
+
+  <mdb-card style="width: 100%">
+
+    <mdb-card-header>Informations complémentaires</mdb-card-header>
+    <mdb-card-body>
+      <div class="row">
+<!--        <form #form="ngForm" (ngSubmit)="save(form)" novalidate>-->
+
+          <table class="table table-striped">
+            <thead></thead>
+            <tbody>
+            <tr>
+              <th scope="row"><b>Date de démarrage</b></th>
+              <td>
+                <mat-form-field class="example-container">
+                  <input
+                    [(ngModel)]="needInfo.startingDate"
+                    [matDatepicker]="picker"
+                    matInput
+                    name="startingDate"
+                    placeholder="Date de démarrage">
+
+                  <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row"><b>Date de réponse</b></th>
+              <td>
+                <mat-form-field class="example-container">
+                  <input
+                    [(ngModel)]="needInfo.responseDate"
+                    [matDatepicker]="picker2"
+                    matInput
+                    name="responseDate"
+                    placeholder="Date de réponse">
+
+                  <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row"><b>date de clôture</b></th>
+              <td>
+                <mat-form-field class="example-container">
+                  <input
+                    [(ngModel)]="needInfo.closingDate"
+                    [matDatepicker]="picker3"
+                    matInput
+                    name="closingDate"
+                    placeholder="date de clôture">
+
+                  <mat-datepicker-toggle [for]="picker3" matSuffix></mat-datepicker-toggle>
+                  <mat-datepicker #picker3></mat-datepicker>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row"><b>Secteur d'activité</b></th>
+              <td>
+                <mat-form-field class="example-container">
+                  <mat-select [(ngModel)]="needInfo.activityArea" name="activityArea" placeholder="Secteur d'activité">
+                    <mat-option value="Other">Autres</mat-option>
+                    <mat-option value="Aerospace">Aéronautique</mat-option>
+                    <mat-option value="Aerospace">Aérospatial</mat-option>
+                    <mat-option value="Agri">Agroalimentaire</mat-option>
+                    <mat-option value="Insurance">Assurance</mat-option>
+                    <mat-option value="Automobile">Automobile</mat-option>
+                    <mat-option value="Bank">Banque</mat-option>
+                    <mat-option value="Buildings">Bâtiments</mat-option>
+                    <mat-option value="Biomedical">Biomédical</mat-option>
+                    <mat-option value="Chemistry">Chimie</mat-option>
+                    <mat-option value="Advice">Conseil</mat-option>
+                    <mat-option value="Defense">Défense</mat-option>
+                    <mat-option value="SoftwarePublishing">Edition de logiciels</mat-option>
+                    <mat-option value="Energy">Energie</mat-option>
+                    <mat-option value="Environment">Environnement</mat-option>
+                    <mat-option value="Rail">Ferroviaire</mat-option>
+                    <mat-option value="LargeDistribution">Grande distribution</mat-option>
+                    <mat-option value="Infrastructure">Infrastructure</mat-option>
+                    <mat-option value="Logistics">Logistique</mat-option>
+                    <mat-option value="Media">Média</mat-option>
+                    <mat-option value="MetalSteelIndustry">Métallurgie/sidérurgie</mat-option>
+                    <mat-option value="Naval">Naval</mat-option>
+                    <mat-option value="Nuclear">Nucléaire</mat-option>
+                    <mat-option value="OilAndGas">Oil &amp; Gaz</mat-option>
+                    <mat-option value="Petrochemicals">Pétrochimie</mat-option>
+                    <mat-option value="Pharmacy">Pharmacie</mat-option>
+                    <mat-option value="Health">Santé</mat-option>
+                    <mat-option value="PublicSector">Secteur public</mat-option>
+                    <mat-option value="Services">Services</mat-option>
+                    <mat-option value="Telecommunications">Télécommunications</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row"><b>Budget</b></th>
+              <td>
+                <mat-form-field class="example-container">
+                  <input [(ngModel)]="needInfo.budget" matInput name="budget" placeholder="Budget" step="any"
+                         type="number"/>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row"><b>Devise</b></th>
+              <td>
+                <mat-form-field class="example-container">
+                  <mat-select [(ngModel)]="needInfo.currency" name="currency"
+                              placeholder="Devise">
+                    <mat-option value="EUR">EUR Euro</mat-option>
+                    <mat-option value="USD">USD United States Dollars</mat-option>
+                    <mat-option value="GPB">GPB United Kingdom Pounds</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row"><b>Durée (Par Mois)</b></th>
+              <td>
+                <mat-form-field class="example-container">
+
+                  <input [(ngModel)]="needInfo.durationByMonth" matInput name="durationByMonth"
+                         placeholder="Durée (Par Mois)"
+                         type="number"/>
+                </mat-form-field>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+          <div class="form-group">
+
+            <button color="primary"
+                    mat-raised-button
+                    type="submit">
+              <mat-icon>save_outline</mat-icon>
+              Enregistrer
+            </button>
+          </div>
+        </form>
+
+        <!--        </form>-->
+      </div>
+    </mdb-card-body>
+  </mdb-card>
+  </div>
+</div>

@@ -1,0 +1,163 @@
+<div class="container tab-pane fade show active" role="tabpanel">
+  <div class="row">
+    <div class="col">
+
+      <mdb-card>
+
+
+        <div class="row">
+          <div class="col">
+            <mdb-card>
+              <mdb-card-header>Informations Général du Contact
+                <label *ngIf="editing" class="float-right">Créer le {{societyContact.createdDate | date }}  à {{ societyContact.createdDate | date:'hh:mm' }}</label>
+              </mdb-card-header>
+            </mdb-card>
+          </div>
+        </div>
+        <!--      <div *ngIf="!editing" class="row">-->
+        <!--        <div class="col border bg-info">-->
+        <!--          <h5 class="text-dark dropdown-header">Informations Général du Contact</h5>-->
+        <!--        </div>-->
+        <!--      </div>-->
+        <mdb-card-body>
+
+          <div class="row">
+            <div class="col ">
+              <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+                <table class="table table-striped">
+                  <thead></thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row"><b>Nom</b></th>
+                    <td>
+                      <input #firstname_input="ngModel" [(ngModel)]="societyContact.firstname"
+                             class="form-control" name="firstname"
+                             required/>
+                      <app-field-error-display
+                        [displayError]="form.submitted && firstname_input.invalid"
+                        [model]="firstname_input"
+                        fieldName="Nom">
+                      </app-field-error-display>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><b>Prénom</b></th>
+                    <td>
+                      <input #lastname_input="ngModel" [(ngModel)]="societyContact.lastname"
+                             class="form-control" name="lastname"
+                             required/>
+                      <app-field-error-display
+                        [displayError]="form.submitted && lastname_input.invalid"
+                        [model]="lastname_input"
+                        fieldName="Prénom">
+                      </app-field-error-display>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><b>Titre</b></th>
+                    <td>
+                      <input #title_input="ngModel" [(ngModel)]="societyContact.title" class="form-control"
+                             name="title"
+                             required/>
+                      <app-field-error-display
+                        [displayError]="form.submitted && title_input.invalid"
+                        [model]="title_input"
+                        fieldName="Titre">
+                      </app-field-error-display>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><b>Service</b></th>
+                    <td>
+                      <input [(ngModel)]="societyContact.service" class="form-control" name="service"/>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><b>Sexe</b></th>
+                    <td>
+                      <div class="segmented-control " style="width: 100%; color: #4fa2d9">
+                        <input [(ngModel)]="societyContact.gender" name="gender" type="radio"
+                               value="M"> Mr <input [(ngModel)]="societyContact.gender"
+                                                    name="gender" type="radio"
+                                                    value="F">
+                        Mme
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><b>Etape</b></th>
+                    <td>
+                      <select [(ngModel)]="societyContact.stage" class="form-control"
+                              name="stage">
+                        <option *ngFor="let stage of stages" [ngValue]="stage.value">{{stage.label}}</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><b>Responsable Manager</b></th>
+                    <td>
+                      <select [(ngModel)]="societyContact.managerReference"
+                              class="form-control" name="manager">
+                        <option *ngFor="let user of users" [ngValue]="user.reference">{{user.firstname}}
+                          {{user.lastname}}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <div class="form-group">
+                  <label>Périmètre Fonctionnel (Nuage de mots clefs)</label>
+                  <textarea [(ngModel)]="societyContact.functionalScope" class="form-control" name="functionalScope"
+                            rows="5"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Périmètre Technique (Nuage de mots clefs)</label>
+                  <textarea [(ngModel)]="societyContact.technicalScope" class="form-control" name="technicalScope"
+                            rows="5"></textarea>
+                </div>
+
+
+                <div class="form-group">
+
+                  <button
+                    style="margin: 10px" type="submit"
+                    color="primary"
+                    mat-raised-button
+                    type="submit">Enregistrer
+                  </button>
+
+                  <!--              <button [class.btn-warning]="editing" class="btn btn-primary"-->
+                  <!--                      type="submit">Enregistrer-->
+                  <!--              </button>-->
+
+                  <button
+                    style="margin: 10px" type="submit"
+                    color="warn"
+                    mat-raised-button
+                    routerLink="/societies/edit/{{societyReference}}/contacts"
+                    type="reset">Annuler
+                  </button>
+
+
+                  <!--              <button class="btn btn-secondary" routerLink="/societies/edit/{{societyReference}}/contacts"-->
+                  <!--                      type="reset">Annuler-->
+                  <!--              </button>-->
+                </div>
+              </form>
+            </div>
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="container-fluid">
+  <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+
+    <button (click)="generatePDF()" mat-raised-button color="primary" type="button" style="margin: 5px">
+      <mat-icon>picture_as_pdf</mat-icon>
+      generer PDF
+    </button>
+
+    <button (click)="sendMail()" mat-raised-button color="primary" type="button" style="margin: 5px">
+      <mat-icon>email</mat-icon>
+      Envoyer Email
+    </button>
+    <button type="submit" mat-raised-button style="margin: 5px; float: right; background-color: #00ca6d; color: white">
+      <mat-icon>save</mat-icon>
+      Enregistrer
+    </button>
+    <div class="book">
+      <div class="page" style="font-size: larger">
+        <div id="divId" class="container">
+          <div style="margin-left: 85%; font-size: small">Le {{ bill.createdDate | date }}</div>
+          <div style="margin-left: 40%; margin-top: 10%"><b>Société: {{ bill.societyName }}</b></div>
+
+          <hr>
+          <div>
+
+            <table>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="bill.billStage" name="resourceStage"
+                                placeholder="Etat de facture">
+                      <mat-option *ngFor="let stage of billStages" [value]="stage.value">
+                        {{stage.label}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td></td>
+                <td>
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="bill.paymentType" placeholder="Mode de règlement" name="paymentType">
+                      <mat-option *ngFor="let paymentType of paymentTypes" [value]="paymentType.value">
+                        {{paymentType.label}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+
+                <td>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-select placeholder="Device" [(ngModel)]="bill.currency" name="currency">
+                      <mat-option *ngFor="let currency of currency" [value]="currency.value">
+                        {{currency.label}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td></td>
+                <td>
+                  <mat-form-field>
+                    <input [(ngModel)]="bill.tva" matInput
+                           name="tva"
+                           placeholder="TVA"
+                           type="text">
+                  </mat-form-field>
+                </td>
+                <td>%</td>
+              </tr>
+
+              <tr>
+                <td><b>Projet</b>:</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{bill.projectName}}</td>
+              </tr>
+              <tr>
+                <td><b>Facture</b>:</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{bill.reference}}</td>
+              </tr>
+              <tr>
+                <td><b>Période:</b></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{bill.billStartDate}} à {{bill.billEndDate}}</td>
+              </tr>
+              <tr>
+                <td><b>Device:</b></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{bill.currency}}</td>
+              </tr>
+            </table>
+
+          </div>
+          <br>
+          <div class="container-fluid" style="margin-top: 2%">
+            <table style="width: 100%" class="table-striped">
+              <tr>
+                <td>Description</td>
+                <td>Tarif HT</td>
+                <td>Q</td>
+                <td>TVA</td>
+                <td>Montant HT</td>
+                <td>Montant TTC</td>
+              </tr>
+              <tr>
+                <td>{{bill.note}}</td>
+                <td>{{bill.unitPrice}}</td>
+                <td>{{bill.quantity}}</td>
+                <td>{{bill.tva}}</td>
+                <td>{{bill.total}}</td>
+                <td>{{bill.totalTtc}}</td>
+              </tr>
+            </table>
+
+          </div>
+          <div style="margin-top: 5%">
+            <table>
+              <tr>
+                <td>Règlement attendu le :</td>
+                <td>{{bill.receiptDate}}</td>
+              </tr>
+              <tr>
+                <td>Conditions de règlement :</td>
+                <td>30 jours net</td>
+              </tr>
+              <tr>
+                <td>Mode de règlement :</td>
+                <td>{{bill.paymentType}}</td>
+              </tr>
+
+            </table>
+
+          </div>
+          <div style="margin-top: 5%">
+            <span><b>Coordonnées bancaires</b></span><br/>
+            <span>Compte: A renseigner !</span>
+          </div>
+
+          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+          <div style="margin-bottom: auto">
+      <span style="font-size: small">
+        Escompte pour règlement anticipé : 0% <br>
+En cas de retard de paiement, seront exigibles, conformément à l'article L441-6 du code du commerce, une indemnité calculée sur la base de 3 fois le taux d'intérêt
+légal en vigueur ainsi qu'une indemnité forfaitaire pour frais de recouvrement de 40 €
+      </span>
+            <hr>
+            <small>
+              <center><b>STREAMLINK - France</b></center>
+            </small>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
